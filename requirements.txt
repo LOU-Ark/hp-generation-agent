@@ -1,0 +1,4 @@
+google-genai
+pandas
+beautifulsoup4
+numpy

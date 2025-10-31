@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ | Datawise Future Inc.</title>
+    <meta name="description" content="データとAIで個人の可能性を最大化するDatawise Future Inc.へのお問い合わせページです。サービス導入、資料請求、共同研究、メディア取材など、お気軽にご連絡ください。">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon (placeholder) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📊</text></svg>">
+
+    <style>
+        /* CSS変数とカスタムスタイルでトップページのデザインを維持 */
+        :root {
+            --color-primary: #020617; /* slate-950 */
+            --color-secondary: #0f172a; /* slate-900 */
+            --color-accent: #38bdf8; /* sky-400 */
+            --color-text-primary: #e2e8f0; /* slate-200 */
+            --color-text-secondary: #94a3b8; /* slate-400 */
+        }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--color-secondary);
+            color: var(--color-text-primary);
+        }
+        .glass-effect {
+            background: rgba(15, 23, 42, 0.6); /* bg-slate-900 with opacity */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5); /* border-slate-700 with opacity */
+        }
+        .form-input-custom {
+            @apply w-full bg-slate-800 border border-slate-600 rounded-md py-2 px-3 text-slate-300 placeholder-slate-500 transition duration-150 ease-in-out;
+            @apply focus:ring-2 focus:ring-sky-500 focus:border-sky-500 focus:outline-none;
+        }
+        .form-label-custom {
+            @apply block mb-2 text-sm font-medium text-slate-400;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- ===== Header ===== -->
+    <header id="header" class="glass-effect fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Site branding -->
+                <div class="shrink-0 mr-4">
+                    <a href="../index.html" class="flex items-center" aria-label="ホームへ">
+                        <svg class="w-8 h-8 text-sky-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M2 7L12 12M22 7L12 12M12 22V12M17 4.5L7 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span class="ml-3 text-xl font-bold text-slate-200 tracking-wider">Datawise Future</span>
+                    </a>
+                </div>
+
+                <!-- Desktop navigation -->
+                <nav class="hidden md:flex md:grow">
+                    <ul class="flex grow justify-end flex-wrap items-center">
+                        <li><a href="../vision/index.html" class="font-medium text-slate-300 hover:text-sky-400 px-4 py-2 flex items-center transition duration-150 ease-in-out">理念・哲学</a></li>
+                        <li class="relative group">
+                            <a href="../solutions/index.html" class="font-medium text-slate-300 hover:text-sky-400 px-4 py-2 flex items-center transition duration-150 ease-in-out">
+                                ソリューション <svg class="w-4 h-4 fill-current text-slate-400 ml-1" viewBox="0 0 16 16"><path d="M8 10l-4-4h8z"/></svg>
+                            </a>
+                            <ul class="absolute left-0 top-full mt-2 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out transform-gpu group-hover:translate-y-0 translate-y-2">
+                                <li><a href="../solutions/individual.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-700 hover:text-sky-400">個人向けサービス</a></li>
+                                <li><a href="../solutions/partner.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-700 hover:text-sky-400">パートナー向け</a></li>
+                                <li><a href="../solutions/case-studies.html" class="block px-4 py-3 text-slate-300 hover:bg-slate-700 hover:text-sky-400">導入事例</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../insights/index.html" class="font-medium text-slate-300 hover:text-sky-400 px-4 py-2 flex items-center transition duration-150 ease-in-out">知見・洞察</a></li>
+                        <li><a href="../collaboration/index.html" class="font-medium text-slate-300 hover:text-sky-400 px-4 py-2 flex items-center transition duration-150 ease-in-out">協業・採用</a></li>
+                        <li><a href="index.html" class="font-medium text-sky-400 px-4 py-2 flex items-center transition duration-150 ease-in-out" aria-current="page">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="flex md:hidden">
+                    <button id="hamburger" class="hamburger-button" aria-controls="mobile-nav" aria-expanded="false">
+                        <span class="sr-only">メニューを開く</span>
+                        <svg class="w-6 h-6 fill-current text-slate-300" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <rect y="4" width="24" height="2" rx="1"/>
+                            <rect y="11" width="24" height="2" rx="1"/>
+                            <rect y="18" width="24" height="2" rx="1"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile navigation -->
+        <div id="mobile-nav" class="hidden md:hidden absolute top-full w-full bg-slate-900 border-t border-slate-800 px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out">
+            <ul class="flex flex-col py-4">
+                <li><a href="../vision/index.html" class="block font-medium text-slate-300 hover:text-sky-400 py-2">理念・哲学</a></li>
+                <li class="py-2">
+                    <span class="font-medium text-slate-400">ソリューション</span>
+                    <ul class="pl-4 mt-1">
+                        <li><a href="../solutions/individual.html" class="block font-medium text-slate-300 hover:text-sky-400 py-1">個人向けサービス</a></li>
+                        <li><a href="../solutions/partner.html" class="block font-medium text-slate-300 hover:text-sky-400 py-1">パートナー向け</a></li>
+                        <li><a href="../solutions/case-studies.html" class="block font-medium text-slate-300 hover:text-sky-400 py-1">導入事例</a></li>
+                    </ul>
+                </li>
+                <li><a href="../insights/index.html" class="block font-medium text-slate-300 hover:text-sky-400 py-2">知見・洞察</a></li>
+                <li><a href="../collaboration/index.html" class="block font-medium text-slate-300 hover:text-sky-400 py-2">協業・採用</a></li>
+                <li><a href="index.html" class="block font-medium text-sky-400 py-2" aria-current="page">お問い合わせ</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ===== Main Content ===== -->
+    <main class="grow">
+        <!-- Page Hero -->
+        <section class="relative pt-32 pb-16 md:pt-40 md:pb-24 bg-slate-900">
+            <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+            <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+                <div class="absolute inset-0 bg-gradient-to-b from-slate-800/20 to-transparent"></div>
+            </div>
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-100 mb-4 tracking-tight">
+                    お問い合わせ
+                </h1>
+                <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto">
+                    データとAIが拓く未来へ。私たちのソリューション、共同研究、ビジョンに関するご質問やご相談を、心よりお待ちしております。以下のフォームより、お気軽にご連絡ください。
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="py-16 lg:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    
+                    <!-- Left Column: Context & FAQ links -->
+                    <div class="lg:col-span-1">
+                        <h2 class="text-2xl font-bold text-slate-100 mb-4">お問い合わせの前に</h2>
+                        <p class="text-slate-400 mb-8">
+                            多く寄せられるご質問や関連資料を事前にご用意しております。お問い合わせの前に一度ご確認いただくことで、よりスムーズなご案内が可能です。
+                        </p>
+                        <div class="space-y-4">
+                            <a href="../solutions/index.html" class="flex items-start p-4 rounded-lg bg-slate-800/50 hover:bg-slate-800 border border-slate-700 transition-colors duration-200">
+                                <svg class="w-6 h-6 text-sky-400 shrink-0 mt-1 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                <div>
+                                    <h3 class="font-semibold text-slate-200">ソリューション概要</h3>
+                                    <p class="text-sm text-slate-400">個人・法人向けサービスの全体像と特徴について解説しています。</p>
+                                </div>
+                            </a>
+                            <a href="../legal/privacy-policy.html" class="flex items-start p-4 rounded-lg bg-slate-800/50 hover:bg-slate-800 border border-slate-700 transition-colors duration-200">
+                                <svg class="w-6 h-6 text-sky-400 shrink-0 mt-1 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                <div>
+                                    <h3 class="font-semibold text-slate-200">データ倫理とプライバシー</h3>
+                                    <p class="text-sm text-slate-400">私たちの倫理規定と個人情報の取り扱いについてご確認いただけます。</p>
+                                </div>
+                            </a>
+                            <a href="../collaboration/index.html" class="flex items-start p-4 rounded-lg bg-slate-800/50 hover:bg-slate-800 border border-slate-700 transition-colors duration-200">
+                                <svg class="w-6 h-6 text-sky-400 shrink-0 mt-1 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                <div>
+                                    <h3 class="font-semibold text-slate-200">協業・採用について</h3>
+                                    <p class="text-sm text-slate-400">パートナーシップやキャリア機会に関する情報はこちらをご覧ください。</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Form -->
+                    <div class="lg:col-span-2">
+                        <div class="glass-effect p-6 sm:p-8 rounded-xl">
+                            <h2 class="text-2xl font-bold text-slate-100 mb-2">お問い合わせフォーム</h2>
+                            <p class="text-slate-400 mb-8">
+                                サービス導入、資料請求、共同研究、メディア取材依頼など各種お問い合わせを承っております。必要事項をご記入の上、送信してください。
+                            </p>
+                            <form action="#" method="POST">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="inquiry-type" class="form-label-custom">お問い合わせ種別</label>
+                                        <select id="inquiry-type" name="inquiry-type" class="form-input-custom">
+                                            <option>サービスに関するお問い合わせ</option>
+                                            <option>資料請求</option>
+                                            <option>共同研究・パートナーシップのご相談</option>
+                                            <option>メディア・取材依頼</option>
+                                            <option>採用に関するお問い合わせ</option>
+                                            <option>その他</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="company" class="form-label-custom">会社名 / 組織名</label>
+                                        <input type="text" name="company" id="company" placeholder="Datawise Future Inc." class="form-input-custom">
+                                    </div>
+                                    <div>
+                                        <label for="name" class="form-label-custom">お名前 <span class="text-red-400">*</span></label>
+                                        <input type="text" name="name" id="name" placeholder="データ 太郎" required class="form-input-custom">
+                                    </div>
+                                    <div>
+                                        <label for="department" class="form-label-custom">部署名</label>
+                                        <input type="text" name="department" id="department" placeholder="研究開発部" class="form-input-custom">
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <label for="email" class="form-label-custom">メールアドレス <span class="text-red-400">*</span></label>
+                                        <input type="email" name="email" id="email" placeholder="your.email@example.com" required class="form-input-custom">
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <label for="phone" class="form-label-custom">電話番号</label>
+                                        <input type="tel" name="phone" id="phone" placeholder="03-1234-5678" class="form-input-custom">
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <label for="message" class="form-label-custom">お問い合わせ内容 <span class="text-red-400">*</span></label>
+                                        <textarea id="message" name="message" rows="6" required class="form-input-custom" placeholder="具体的なご相談内容をご記入ください。"></textarea>
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <div class="flex items-start">
+                                            <div class="flex items-center h-5">
+                                                <input id="privacy-policy" name="privacy-policy" type="checkbox" required class="focus:ring-sky-500 h-4 w-4 text-sky-600 bg-slate-700 border-slate-500 rounded">
+                                            </div>
+                                            <div class="ml-3 text-sm">
+                                                <label for="privacy-policy" class="text-slate-400">
+                                                    <a href="../legal/privacy-policy.html" class="font-medium text-sky-400 hover:underline" target="_blank">プライバシーポリシー</a>に同意します。
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-8 text-right">
+                                    <button type="submit" class="inline-flex justify-center items-center py-3 px-8 border border-transparent text-base font-medium rounded-md text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-sky-500 transition-colors">
+                                        送信する
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- ===== Footer ===== -->
+    <footer class="bg-slate-950 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-8">
+                <!-- Column 1: Brand -->
+                <div class="col-span-2 md:col-span-4 lg:col-span-4">
+                    <div class="mb-4">
+                        <a href="../index.html" class="flex items-center" aria-label="ホームへ">
+                            <svg class="w-8 h-8 text-sky-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M2 7L12 12M22 7L12 12M12 22V12M17 4.5L7 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span class="ml-3 text-xl font-bold text-slate-200 tracking-wider">Datawise Future</span>
+                        </a>
+                    </div>
+                    <p class="text-slate-400 text-sm max-w-xs">データとAIの力で個人の可能性とQOLを最大化し、より豊かな社会を実現する。</p>
+                </div>
+
+                <!-- Column 2: Main Links -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-2">
+                    <h6 class="text-slate-200 font-semibold mb-3">サイトマップ</h6>
+                    <ul class="space-y-2">
+                        <li><a href="../vision/index.html" class="text-slate-400 hover:text-sky-400 transition-colors">理念・哲学</a></li>
+                        <li><a href="../solutions/index.html" class="text-slate-400 hover:text-sky-400 transition-colors">ソリューション</a></li>
+                        <li><a href="../insights/index.html" class="text-slate-400 hover:text-sky-400 transition-colors">知見・洞察</a></li>
+                        <li><a href="../collaboration/index.html" class="text-slate-400 hover:text-sky-400 transition-colors">協業・採用</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Detailed Links -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-2">
+                    <h6 class="text-slate-200 font-semibold mb-3">詳細</h6>
+                    <ul class="space-y-2">
+                        <li><a href="../solutions/individual.html" class="text-slate-400 hover:text-sky-400 transition-colors">個人向けサービス</a></li>
+                        <li><a href="../solutions/partner.html" class="text-slate-400 hover:text-sky-400 transition-colors">パートナーソリューション</a></li>
+                        <li><a href="../solutions/case-studies.html" class="text-slate-400 hover:text-sky-400 transition-colors">導入事例</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-sky-400 transition-colors">ニュース (仮)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Legal & Contact -->
+                <div class="col-span-2 md:col-span-4 lg:col-span-4">
+                    <h6 class="text-slate-200 font-semibold mb-3">情報</h6>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-slate-400 hover:text-sky-400 transition-colors">お問い合わせ</a></li>
+                        <li><a href="../legal/privacy-policy.html" class="text-slate-400 hover:text-sky-400 transition-colors">プライバシーポリシー</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-sky-400 transition-colors">利用規約 (仮)</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center">
+                <div class="text-sm text-slate-500 mb-4 sm:mb-0">
+                    &copy; 2024 Datawise Future Inc. All rights reserved.
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Twitter" class="text-slate-500 hover:text-sky-400 transition-colors">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.21 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="text-slate-500 hover:text-sky-400 transition-colors">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M21.543 21.543H17.42v-6.04c0-1.44-.03-3.28-2.001-3.28-2.001 0-2.309 1.56-2.309 3.18V21.543H9.004V9.5h4.015v1.84h.058c.558-1.05 1.924-2.16 3.96-2.16 4.24 0 5.02 2.79 5.02 6.42v7.44zM5.13 7.66c-1.29 0-2.33-.99-2.33-2.22s1.04-2.22 2.33-2.22 2.33.99 2.33 2.22c0 1.23-1.04 2.22-2.33 2.22zM2.8 21.54h4.48V9.5H2.8v12.04z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        hamburger.addEventListener('click', () => {
+            const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+            hamburger.setAttribute('aria-expanded', !isExpanded);
+            mobileNav.classList.toggle('hidden');
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+</body>
+</html>

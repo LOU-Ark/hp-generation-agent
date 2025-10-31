@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知見・洞察 | 株式会社データフロンティア</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #1a237e; /* 深いインディゴ */
+            --color-secondary: #0d47a1; /* 深いブルー */
+            --color-accent: #ff6f00; /* 鮮やかなアンバー */
+            --color-text: #212121; /* ほぼ黒 */
+            --color-background: #f5f5f5; /* 明るいグレー */
+            --color-surface: #ffffff; /* 白 */
+        }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-background);
+        }
+        .font-sans {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .bg-primary { background-color: var(--color-primary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .bg-accent { background-color: var(--color-accent); }
+        .bg-background { background-color: var(--color-background); }
+        .bg-surface { background-color: var(--color-surface); }
+        .text-primary { color: var(--color-primary); }
+        .text-secondary { color: var(--color-secondary); }
+        .text-accent { color: var(--color-accent); }
+        .text-surface { color: var(--color-surface); }
+        .border-primary { border-color: var(--color-primary); }
+        .border-accent { border-color: var(--color-accent); }
+        .hover\:bg-accent-dark:hover { background-color: #ef6c00; }
+        
+        /* メニュー開閉用 */
+        .menu-open {
+            transform: translateX(0);
+        }
+        .menu-closed {
+            transform: translateX(-100%);
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-surface shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-serif text-2xl font-bold text-primary">DataFrontier Inc.</a>
+            <nav class="hidden lg:flex items-center space-x-8">
+                <a href="../vision/index.html" class="text-gray-700 hover:text-accent transition-colors duration-300">理念・哲学</a>
+                <a href="../solutions/index.html" class="text-gray-700 hover:text-accent transition-colors duration-300">ソリューション</a>
+                <a href="index.html" class="text-accent font-bold border-b-2 border-accent">知見・洞察</a>
+                <a href="../collaboration/index.html" class="text-gray-700 hover:text-accent transition-colors duration-300">協業・採用</a>
+                <a href="../contact/index.html" class="bg-accent text-white py-2 px-4 rounded-full hover:bg-accent-dark transition-colors duration-300">お問い合わせ</a>
+            </nav>
+            <div class="lg:hidden">
+                <button id="menu-button" class="text-primary focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden bg-surface/95 backdrop-blur-sm fixed top-0 left-0 w-full h-full menu-closed transition-transform duration-300 ease-in-out z-50">
+            <div class="flex justify-end p-6">
+                <button id="close-menu-button" class="text-primary">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <nav class="flex flex-col items-center space-y-8 mt-8">
+                <a href="../index.html" class="text-2xl text-gray-700 hover:text-accent">ホーム</a>
+                <a href="../vision/index.html" class="text-2xl text-gray-700 hover:text-accent">理念・哲学</a>
+                <a href="../solutions/index.html" class="text-2xl text-gray-700 hover:text-accent">ソリューション</a>
+                <a href="index.html" class="text-2xl text-accent font-bold">知見・洞察</a>
+                <a href="../collaboration/index.html" class="text-2xl text-gray-700 hover:text-accent">協業・採用</a>
+                <a href="../contact/index.html" class="mt-4 bg-accent text-white py-3 px-6 rounded-full text-lg">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-primary text-white">
+            <div class="container mx-auto px-6 py-20 lg:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-serif font-bold mb-4 fade-in-up">知見・洞察</h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed fade-in-up" style="animation-delay: 0.2s;">
+                    データサイエンスの最前線。私たちの研究開発、分析、そしてSociety 5.0の未来を形作る洞察を共有します。
+                </p>
+            </div>
+        </section>
+
+        <!-- Featured Insights -->
+        <section class="py-16 lg:py-24 bg-background">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2">注目記事</h2>
+                    <p class="text-gray-600">最新の研究成果、技術解説、そして未来への提言。</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Featured Card 1: R&D -->
+                    <div class="bg-surface rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=1920&auto=format&fit=crop" alt="Abstract data visualization" class="w-full h-56 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <div class="mb-4">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">研究開発</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary mb-3 flex-grow">Transformerモデルを用いたライフログ時系列データの異常検知とQOL予測への応用</h3>
+                            <p class="text-gray-600 mb-4 text-sm">
+                                個人の行動ログから未来の健康状態や生活の質を予測する、最新の深層学習モデルのアーキテクチャとその可能性について論じます。
+                            </p>
+                            <a href="#" class="mt-auto text-accent font-bold hover:underline self-start">詳しく読む &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Featured Card 2: Whitepaper -->
+                    <div class="bg-surface rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1920&auto=format&fit=crop" alt="Data charts and graphs on a screen" class="w-full h-56 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <div class="mb-4">
+                                <span class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">ホワイトペーパー</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary mb-3 flex-grow">【資料】Society 5.0における倫理的AIの設計原則と実践ガイドライン</h3>
+                            <p class="text-gray-600 mb-4 text-sm">
+                                データとAIの力を個人のQOL向上のために活用する上で不可欠な、倫理、透明性、説明責任を担保するための具体的な設計原則を解説。
+                            </p>
+                            <a href="#" class="mt-auto bg-accent text-white py-2 px-4 rounded-full text-sm font-bold hover:bg-accent-dark transition-colors duration-300 self-start">資料をダウンロード</a>
+                        </div>
+                    </div>
+                    <!-- Featured Card 3: Blog -->
+                    <div class="bg-surface rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1920&auto=format&fit=crop" alt="Person working on a laptop with code" class="w-full h-56 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <div class="mb-4">
+                                <span class="bg-orange-100 text-orange-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">ブログ</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary mb-3 flex-grow">解説：因果推論が切り拓く、パーソナライズド・マーケティングの新たな地平</h3>
+                            <p class="text-gray-600 mb-4 text-sm">
+                                「相関」と「因果」の違いを理解し、真に効果的な施策を導き出すためのデータサイエンス技術「因果推論」のビジネス応用を平易に解説します。
+                            </p>
+                            <a href="#" class="mt-auto text-accent font-bold hover:underline self-start">詳しく読む &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Insights with Filters -->
+        <section class="py-16 lg:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2">すべての知見</h2>
+                    <p class="text-gray-600">カテゴリ別に私たちの知見を探求する。</p>
+                </div>
+                <div class="flex justify-center flex-wrap gap-2 mb-12">
+                    <button class="px-4 py-2 text-sm font-semibold bg-primary text-white rounded-full">すべて</button>
+                    <button class="px-4 py-2 text-sm font-semibold bg-surface text-primary border border-gray-300 rounded-full hover:bg-gray-100">研究開発</button>
+                    <button class="px-4 py-2 text-sm font-semibold bg-surface text-primary border border-gray-300 rounded-full hover:bg-gray-100">ブログ</button>
+                    <button class="px-4 py-2 text-sm font-semibold bg-surface text-primary border border-gray-300 rounded-full hover:bg-gray-100">ホワイトペーパー</button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Insight Card 1 -->
+                    <article class="bg-surface rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <img src="https://images.unsplash.com/photo-1611095562057-2e7019348a1c?q=80&w=1920&auto=format&fit=crop" alt="AI and human interaction" class="w-full h-48 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <span class="text-xs text-blue-800 font-semibold mb-2">研究開発</span>
+                            <h4 class="text-lg font-bold text-primary mb-2 flex-grow">LLMによる個人のキャリアパス生成と潜在能力の可視化</h4>
+                            <p class="text-sm text-gray-500 mb-4">2023年11月15日</p>
+                            <a href="#" class="mt-auto text-accent font-bold text-sm hover:underline">詳しく読む &rarr;</a>
+                        </div>
+                    </article>
+                    <!-- Insight Card 2 -->
+                    <article class="bg-surface rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <img src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?q=80&w=1920&auto=format&fit=crop" alt="Data privacy concept" class="w-full h-48 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <span class="text-xs text-blue-800 font-semibold mb-2">研究開発</span>
+                            <h4 class="text-lg font-bold text-primary mb-2 flex-grow">連合学習を用いたプライバシー保護型ヘルスケアデータ分析</h4>
+                            <p class="text-sm text-gray-500 mb-4">2023年10月28日</p>
+                            <a href="#" class="mt-auto text-accent font-bold text-sm hover:underline">詳しく読む &rarr;</a>
+                        </div>
+                    </article>
+                    <!-- Insight Card 3 -->
+                    <article class="bg-surface rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <img src="https://images.unsplash.com/photo-1556740738-b6a63e2775df?q=80&w=1920&auto=format&fit=crop" alt="Business discussion" class="w-full h-48 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <span class="text-xs text-orange-800 font-semibold mb-2">ブログ</span>
+                            <h4 class="text-lg font-bold text-primary mb-2 flex-grow">ビジネスパーソンが知るべき統計学の基礎：A/Bテストの罠</h4>
+                            <p class="text-sm text-gray-500 mb-4">2023年10月10日</p>
+                            <a href="#" class="mt-auto text-accent font-bold text-sm hover:underline">詳しく読む &rarr;</a>
+                        </div>
+                    </article>
+                    <!-- Insight Card 4 -->
+                    <article class="bg-surface rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1920&auto=format&fit=crop" alt="Data-driven organization chart" class="w-full h-48 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <span class="text-xs text-green-800 font-semibold mb-2">ホワイトペーパー</span>
+                            <h4 class="text-lg font-bold text-primary mb-2 flex-grow">【PDF】データドリブンな組織文化を醸成する5つのステップ</h4>
+                            <p class="text-sm text-gray-500 mb-4">2023年9月22日</p>
+                            <a href="#" class="mt-auto text-accent font-bold text-sm hover:underline">ダウンロードする &rarr;</a>
+                        </div>
+                    </article>
+                     <!-- Insight Card 5 -->
+                    <article class="bg-surface rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <img src="https://images.unsplash.com/photo-1634733600136-49d383462b0d?q=80&w=1920&auto=format&fit=crop" alt="Graph Neural Network visualization" class="w-full h-48 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <span class="text-xs text-blue-800 font-semibold mb-2">研究開発</span>
+                            <h4 class="text-lg font-bold text-primary mb-2 flex-grow">グラフニューラルネットワーク(GNN)を用いたキャリアパス推薦システムの構築</h4>
+                            <p class="text-sm text-gray-500 mb-4">2023年9月5日</p>
+                            <a href="#" class="mt-auto text-accent font-bold text-sm hover:underline">詳しく読む &rarr;</a>
+                        </div>
+                    </article>
+                     <!-- Insight Card 6 -->
+                    <article class="bg-surface rounded-lg shadow-md overflow-hidden flex flex-col">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1920&auto=format&fit=crop" alt="Skills and tools for data science" class="w-full h-48 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <span class="text-xs text-orange-800 font-semibold mb-2">ブログ</span>
+                            <h4 class="text-lg font-bold text-primary mb-2 flex-grow">データサイエンティストに聞く：キャリアを成功させる必須スキルセット</h4>
+                            <p class="text-sm text-gray-500 mb-4">2023年8月18日</p>
+                            <a href="#" class="mt-auto text-accent font-bold text-sm hover:underline">詳しく読む &rarr;</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-16 flex justify-center">
+                    <nav class="flex items-center space-x-2">
+                        <span class="px-4 py-2 text-gray-500 bg-gray-200 rounded-md">前へ</span>
+                        <a href="#" class="px-4 py-2 text-white bg-primary rounded-md">1</a>
+                        <a href="#" class="px-4 py-2 text-primary bg-surface rounded-md hover:bg-gray-100">2</a>
+                        <a href="#" class="px-4 py-2 text-primary bg-surface rounded-md hover:bg-gray-100">3</a>
+                        <span class="px-4 py-2 text-gray-500">...</span>
+                        <a href="#" class="px-4 py-2 text-primary bg-surface rounded-md hover:bg-gray-100">8</a>
+                        <a href="#" class="px-4 py-2 text-primary bg-surface rounded-md hover:bg-gray-100">次へ</a>
+                    </nav>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Column 1: Company Info -->
+                <div>
+                    <h3 class="font-serif text-xl font-bold mb-4">DataFrontier Inc.</h3>
+                    <p class="text-sm text-gray-300">データとAIで個人の可能性とQOLを最大化し、より豊かな社会を実現する。</p>
+                </div>
+                <!-- Column 2: Solutions -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4">ソリューション</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="../solutions/individual.html" class="text-gray-300 hover:text-accent">個人向けサービス</a></li>
+                        <li><a href="../solutions/partner.html" class="text-gray-300 hover:text-accent">パートナーソリューション</a></li>
+                        <li><a href="../solutions/case-studies.html" class="text-gray-300 hover:text-accent">導入事例</a></li>
+                        <li><a href="../solutions/index.html" class="text-gray-300 hover:text-accent">全ソリューション概要</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3: Resources -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4">リソース</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="../vision/index.html" class="text-gray-300 hover:text-accent">理念・哲学</a></li>
+                        <li><a href="index.html" class="text-gray-300 hover:text-accent">知見・洞察</a></li>
+                        <li><a href="../collaboration/index.html" class="text-gray-300 hover:text-accent">協業・採用</a></li>
+                        <li><a href="../contact/index.html" class="text-gray-300 hover:text-accent">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <!-- Column 4: Legal -->
+                <div>
+                    <h3 class="font-bold text-lg mb-4">法務情報</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="../legal/privacy-policy.html" class="text-gray-300 hover:text-accent">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
+                &copy; 2024 DataFrontier Inc. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const closeMenuButton = document.getElementById('close-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('menu-closed');
+            mobileMenu.classList.add('menu-open');
+        });
+
+        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('menu-open');
+            mobileMenu.classList.add('menu-closed');
+        });
+    </script>
+</body>
+</html>
