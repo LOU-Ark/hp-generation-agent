@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サイトポリシー - OptiLife Data Innovations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #0D47A1; /* 濃い青: 知性、信頼性 */
+            --color-secondary: #1976D2; /* 青: 技術、革新 */
+            --color-accent: #42A5F5; /* 明るい青: 透明性、未来志向 */
+            --color-background: #F8F9FA; /* 背景: クリーン、ミニマル */
+            --color-text: #212529; /* テキスト: 可読性、専門性 */
+            --color-text-muted: #6C757D; /* 補助テキスト: 落ち着き */
+        }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+        }
+        .font-roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        .bg-primary { background-color: var(--color-primary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .bg-accent { background-color: var(--color-accent); }
+        .text-primary { color: var(--color-primary); }
+        .text-secondary { color: var(--color-secondary); }
+        .text-accent { color: var(--color-accent); }
+        .border-primary { border-color: var(--color-primary); }
+        .hover\:bg-primary-dark:hover { background-color: #0b3a85; }
+        .hover\:text-accent:hover { color: var(--color-accent); }
+        .prose h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 0.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .prose h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-secondary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .prose p, .prose ul, .prose ol {
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+        .prose a {
+            color: var(--color-secondary);
+            text-decoration: none;
+        }
+        .prose a:hover {
+            color: var(--color-accent);
+            text-decoration: underline;
+        }
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-primary font-roboto">
+                    <a href="../index.html">OptiLife Data Innovations</a>
+                </div>
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="../vision/index.html" class="text-gray-600 hover:text-accent">理念・哲学</a>
+                    <a href="../solutions/index.html" class="text-gray-600 hover:text-accent">ソリューション</a>
+                    <a href="../insights/index.html" class="text-gray-600 hover:text-accent">インサイト</a>
+                    <a href="../collaboration/index.html" class="text-gray-600 hover:text-accent">共創・採用</a>
+                    <a href="../contact/index.html" class="bg-secondary text-white font-bold py-2 px-4 rounded-full hover:bg-accent transition-colors duration-300">お問い合わせ</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+            <a href="../vision/index.html" class="block text-gray-600 hover:text-accent">理念・哲学</a>
+            <a href="../solutions/index.html" class="block text-gray-600 hover:text-accent">ソリューション</a>
+            <a href="../insights/index.html" class="block text-gray-600 hover:text-accent">インサイト</a>
+            <a href="../collaboration/index.html" class="block text-gray-600 hover:text-accent">共創・採用</a>
+            <a href="../contact/index.html" class="block bg-secondary text-white text-center font-bold py-2 px-4 rounded-full hover:bg-accent transition-colors duration-300 mt-2">お問い合わせ</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Page Header -->
+        <section class="bg-white py-12 md:py-20">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-sm font-bold text-accent uppercase tracking-wider font-roboto">LEGAL</p>
+                <h1 class="text-4xl md:text-5xl font-bold text-primary mt-2">サイトポリシー</h1>
+                <p class="text-lg text-text-muted mt-4 max-w-3xl mx-auto">当ウェブサイトの利用規約、著作権、免責事項を定めています。<br>データとAIに関する情報提供の透明性と信頼性を確保するための指針です。</p>
+                <div class="mt-6 text-sm text-gray-500">
+                    <a href="../index.html" class="hover:text-accent">ホーム</a>
+                    <span class="mx-2">/</span>
+                    <span>サイトポリシー</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Site Policy Content -->
+        <section class="py-16 md:py-24">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="bg-white p-8 md:p-12 rounded-lg shadow-lg prose max-w-none">
+                    <p class="text-sm text-gray-500">最終更新日: 2023年10月27日</p>
+                    
+                    <p>このウェブサイト（以下「当サイト」といいます）は、株式会社OptiLife Data Innovations（以下「当社」といいます）が運営しています。当サイトをご利用される前には、以下のサイトポリシー（以下「本ポリシー」といいます）をお読みいただき、これらの条件にご同意された場合のみご利用ください。本ポリシーは、当サイトの利用におけるルールと責任範囲を明確にし、利用者と当社との間の信頼関係を構築することを目的とします。</p>
+
+                    <h2>第1条（総則）</h2>
+                    <p>本ポリシーは、当サイトの利用に関する一切の事項に適用されます。当サイトは、当社のパーパスである「データを通じて個人の可能性を最大化し、より豊かな社会を実現すること」に基づき、Web行動ログのAI解析技術、データサイエンスに関する最先端の知見、および「生活者最適化」の概念に関する情報を提供することを主目的としています。利用者は、本ポリシーを誠実に遵守するものとします。</p>
+
+                    <h2>第2条（著作権及び知的財産権）</h2>
+                    <p>当サイトに掲載されている全てのコンテンツ（文章、画像、データ、図表、映像、AIモデルの概念図、ソフトウェア等）に関する著作権およびその他の知的財産権は、当社または当社に利用を許諾した権利者に帰属します。私的使用など法律によって認められる範囲を超えて、これらの情報を無断で複製、改変、転用、アップロード、掲示、送信、頒布、販売、出版等することは、法律で禁じられています。</p>
+                    <h3>引用について</h3>
+                    <p>当社の研究レポートやインサイト記事等のコンテンツを引用される場合は、以下の条件を遵守してください。</p>
+                    <ul>
+                        <li>引用の目的が公正な慣行に合致するものであること。</li>
+                        <li>報道、批評、研究その他の引用の目的上、正当な範囲内であること。</li>
+                        <li>引用箇所を明確に区分し、出典（当サイト名およびURL）を明記すること。</li>
+                    </ul>
+
+                    <h2>第3条（禁止事項）</h2>
+                    <p>利用者は、当サイトの利用にあたり、以下の行為を行ってはならないものとします。</p>
+                    <ul>
+                        <li>当社または第三者の知的財産権、プライバシー、名誉、その他の権利または利益を侵害する行為。</li>
+                        <li>法令、公序良俗に反する行為、またはそのおそれのある行為。</li>
+                        <li>当サイトのサーバーやネットワークシステムに支障を与える行為、またはそのおそれのある行為。</li>
+                        <li>当社のAIモデルやアルゴリズム、データ解析手法等をリバースエンジニアリング、逆コンパイル、または逆アセンブルする行為。</li>
+                        <li>当サイトを通じて得られた情報を、当社の許可なく商業目的で利用する行為。</li>
+                        <li>その他、当社が不適切と判断する行為。</li>
+                    </ul>
+
+                    <h2>第4条（免責事項）</h2>
+                    <p>当社は、当サイトに掲載する情報について、細心の注意を払っておりますが、その内容の正確性、完全性、有用性、安全性等について、いかなる保証もするものではありません。当サイトが提供するデータ、分析結果、将来の予測に関する記述は、情報提供を目的としたものであり、特定の投資、事業戦略、または個人の意思決定を推奨するものではありません。</p>
+                    <p>特に、AIによる分析結果には、学習データの範囲やモデルの特性による一定の限界が含まれる可能性があります。当社は、利用者が当サイトの情報を用いて行う一切の行為（データの利用、それに基づく意思決定等）について、何ら責任を負うものではありません。</p>
+                    <p>また、当社は、予告なしに当サイトの運営を中断または中止したり、掲載されている情報を変更したりすることがあります。これによって利用者に生じたいかなる損害についても、当社は責任を負いません。</p>
+
+                    <h2>第5条（リンクについて）</h2>
+                    <p>当サイトへのリンクは、原則として自由です。ただし、リンク元のウェブサイトの内容が法令や公序良俗に反する場合など、当社が不適切と判断した場合は、リンクの削除をお願いすることがあります。</p>
+                    <p>当サイトから、または当サイトへリンクを張っている当社以外の第三者のウェブサイト（以下「リンクサイト」といいます）の内容は、それぞれ各社の責任で管理されるものであり、当社の管理下にあるものではありません。リンクサイトの利用にあたっては、それぞれのリンクサイトの利用条件等に従ってください。当社は、リンクサイトの内容について、また、それらをご利用になったことにより生じたいかなる損害についても責任を負いません。</p>
+
+                    <h2>第6条（準拠法及び管轄裁判所）</h2>
+                    <p>本ポリシーの解釈にあたっては、日本法を準拠法とします。当サイトの利用に関して紛争が生じた場合には、東京地方裁判所を第一審の専属的合意管轄裁判所とします。</p>
+
+                    <h2>第7条（本ポリシーの変更）</h2>
+                    <p>当社は、必要に応じて、利用者に事前の通知をすることなく、本ポリシーの内容を変更することができます。変更後のサイトポリシーは、当サイトに掲載された時点から効力を生じるものとします。利用者は、定期的に本ポリシーを確認するものとし、変更後のポリシーに同意できない場合は、直ちに当サイトの利用を中止してください。</p>
+                    
+                    <p class="mt-8">以上</p>
+                    <p>株式会社OptiLife Data Innovations</p>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Column 1: Company Info -->
+                <div>
+                    <h3 class="text-xl font-bold font-roboto mb-4">OptiLife Data Innovations</h3>
+                    <p class="text-gray-400 text-sm">データを通じて個人の可能性を最大化し、より豊かな社会を実現します。</p>
+                    <a href="../about/index.html" class="text-sm text-accent hover:underline mt-4 inline-block">会社概要へ</a>
+                </div>
+
+                <!-- Column 2: Explore -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Explore</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../vision/index.html" class="text-gray-400 hover:text-white transition-colors duration-300">理念・哲学</a></li>
+                        <li><a href="../solutions/index.html" class="text-gray-400 hover:text-white transition-colors duration-300">ソリューション</a></li>
+                        <li><a href="../insights/index.html" class="text-gray-400 hover:text-white transition-colors duration-300">インサイト</a></li>
+                        <li><a href="../collaboration/index.html" class="text-gray-400 hover:text-white transition-colors duration-300">共創・採用</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Legal & Info -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Legal & Info</h3>
+                    <ul class="space-y-2">
+                        <li><a href="privacy-policy.html" class="text-gray-400 hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                        <li><a href="site-policy.html" class="text-gray-400 hover:text-white transition-colors duration-300">サイトポリシー</a></li>
+                        <li><a href="../contact/index.html" class="text-gray-400 hover:text-white transition-colors duration-300">お問い合わせ</a></li>
+                        <li><a href="../news/index.html" class="text-gray-400 hover:text-white transition-colors duration-300">ニュース</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Connect -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Connect</h3>
+                    <p class="text-gray-400 text-sm mb-4">最新のインサイトやニュースをお届けします。</p>
+                    <form class="flex">
+                        <input type="email" placeholder="メールアドレス" class="w-full px-3 py-2 text-gray-800 rounded-l-md focus:outline-none">
+                        <button type="submit" class="bg-secondary text-white px-4 py-2 rounded-r-md hover:bg-accent transition-colors duration-300">登録</button>
+                    </form>
+                    <div class="flex space-x-4 mt-4">
+                        <!-- Add Social Media Icons here -->
+                        <a href="#" class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" /></svg></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
+                <p>&copy; 2023 OptiLife Data Innovations Inc. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            var menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+</html>

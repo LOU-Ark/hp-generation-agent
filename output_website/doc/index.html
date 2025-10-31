@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホーム | OptiLife Data Innovations</title>
+    <meta name="description" content="OptiLife Data Innovationsは、Web行動ログAI解析を通じて『生活者最適化』を推進し、Society 5.0の豊かな未来を創造します。">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Alpine.js for mobile menu interactivity -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Custom Tailwind CSS Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    // デザインフレームの維持：配色、フォント、CSS変数
+                    colors: {
+                        'brand-navy': '#0D1B34',      // 知的、データ駆動型
+                        'brand-primary': '#4F46E5',   // 革新的、テクノロジー
+                        'brand-accent': '#6366F1',    // 明るいアクセント
+                        'brand-light-bg': '#F8F9FC',  // クリーンな背景
+                        'brand-text': '#1E293B',      // メインテキスト (Slate-800)
+                        'brand-subtext': '#475569',   // サブテキスト (Slate-600)
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* CSS変数のようにカスタムフォントを適用 */
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .gradient-bg {
+            background: radial-gradient(circle at 10% 20%, rgb(233, 239, 255) 0%, rgb(255, 255, 255) 90%);
+        }
+    </style>
+</head>
+<body class="bg-brand-light-bg text-brand-text">
+
+    <!-- Header -->
+    <header x-data="{ open: false }" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="/index.html" class="flex items-center space-x-2">
+                    <svg class="h-8 w-8 text-brand-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12.75l9-9m0 0l-9 9m9-9v18m-9-9h18" />
+                    </svg>
+                    <span class="text-xl font-bold text-brand-navy tracking-tight">OptiLife Data Innovations</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/vision/index.html" class="font-medium text-brand-subtext hover:text-brand-primary transition-colors">理念・哲学</a>
+                    <a href="/solutions/index.html" class="font-medium text-brand-subtext hover:text-brand-primary transition-colors">ソリューション</a>
+                    <a href="/insights/index.html" class="font-medium text-brand-subtext hover:text-brand-primary transition-colors">インサイト</a>
+                    <a href="/collaboration/index.html" class="font-medium text-brand-subtext hover:text-brand-primary transition-colors">共創・採用</a>
+                </nav>
+
+                <div class="flex items-center">
+                    <a href="/contact/index.html" class="hidden sm:inline-block bg-brand-primary text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-brand-accent transition-colors">お問い合わせ</a>
+                    
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden ml-4">
+                        <button @click="open = !open" class="inline-flex items-center justify-center p-2 rounded-md text-brand-subtext hover:text-brand-navy hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-primary">
+                            <span class="sr-only">メインメニューを開く</span>
+                            <svg x-show="!open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                            </svg>
+                            <svg x-show="open" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div x-show="open" @click.away="open = false" class="md:hidden" x-transition>
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t">
+                <a href="/vision/index.html" class="block px-3 py-2 rounded-md text-base font-medium text-brand-subtext hover:text-brand-primary hover:bg-gray-50">理念・哲学</a>
+                <a href="/solutions/index.html" class="block px-3 py-2 rounded-md text-base font-medium text-brand-subtext hover:text-brand-primary hover:bg-gray-50">ソリューション</a>
+                <a href="/insights/index.html" class="block px-3 py-2 rounded-md text-base font-medium text-brand-subtext hover:text-brand-primary hover:bg-gray-50">インサイト</a>
+                <a href="/collaboration/index.html" class="block px-3 py-2 rounded-md text-base font-medium text-brand-subtext hover:text-brand-primary hover:bg-gray-50">共創・採用</a>
+                <a href="/contact/index.html" class="block w-full text-left mt-2 px-3 py-2 rounded-md text-base font-medium bg-brand-pale text-brand-primary hover:bg-indigo-200">お問い合わせ</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative gradient-bg">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-navy tracking-tighter">
+                        データとAIが、<br class="sm:hidden">個人の可能性を解き放つ。
+                    </h1>
+                    <p class="mt-6 text-lg sm:text-xl text-brand-subtext max-w-2xl mx-auto">
+                        OptiLife Data Innovationsは、Web行動ログAI解析を通じて「生活者最適化」を推進し、Society 5.0の豊かな未来を創造します。
+                    </p>
+                    <div class="mt-10 flex items-center justify-center gap-x-6">
+                        <a href="/solutions/index.html" class="bg-brand-primary text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-brand-accent transition-transform hover:scale-105">
+                            ソリューションを見る
+                        </a>
+                        <a href="/contact/index.html" class="font-semibold text-brand-subtext hover:text-brand-navy group">
+                            お問い合わせ <span aria-hidden="true" class="inline-block transition-transform group-hover:translate-x-1">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">
+                <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#808eff] to-[#5d55fa] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+            </div>
+        </section>
+
+        <!-- VISION Section -->
+        <section class="py-20 sm:py-28 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-base font-semibold leading-7 text-brand-primary">VISION</h2>
+                    <p class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-brand-navy">
+                        個人の可能性を最大化し、豊かな社会へ
+                    </p>
+                    <p class="mt-6 text-lg leading-8 text-brand-subtext">
+                        私たちはデータとAIの力で、消費、健康、学習、キャリアのあらゆる意思決定を支援します。誰もが自身の可能性を最大限に引き出せる「生活者最適化」が浸透した社会の実現が、私たちの挑戦です。
+                    </p>
+                    <div class="mt-10">
+                        <a href="/vision/index.html" class="font-semibold text-brand-primary hover:text-brand-accent group">
+                            OptiLifeの理念・哲学を見る <span aria-hidden="true" class="inline-block transition-transform group-hover:translate-x-1">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOLUTIONS Section -->
+        <section class="py-20 sm:py-28 bg-brand-light-bg">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
+                    <h2 class="text-base font-semibold leading-7 text-brand-primary">SOLUTIONS</h2>
+                    <p class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-brand-navy">
+                        未来を創造するソリューション
+                    </p>
+                    <p class="mt-6 text-lg leading-8 text-brand-subtext">
+                        データ駆動型の意思決定を変革し、ビジネスと生活者の双方に新たな価値を提供する具体的なソリューションを紹介します。
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Solution Card 1 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200/50">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-brand-pale text-brand-primary">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" /></svg>
+                            </div>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-brand-navy">生活者最適化プラットフォーム</h3>
+                        <p class="mt-2 text-brand-subtext">AIが個々のユーザーに寄り添い、最適な情報・サービス・選択肢を提示するSaaSプラットフォーム。</p>
+                    </div>
+                    <!-- Solution Card 2 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200/50">
+                        <div class="flex-shrink-0">
+                           <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-brand-pale text-brand-primary">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 100 15 7.5 7.5 0 000-15zM21 21l-5.197-5.197" /></svg>
+                           </div>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-brand-navy">データサイエンスPDCA支援</h3>
+                        <p class="mt-2 text-brand-subtext">専門家チームが伴走し、課題発見から分析、施策実行、効果検証までを一気通貫でサポート。</p>
+                    </div>
+                    <!-- Solution Card 3 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200/50">
+                        <div class="flex-shrink-0">
+                           <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-brand-pale text-brand-primary">
+                                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg>
+                           </div>
+                        </div>
+                        <h3 class="mt-6 text-xl font-semibold text-brand-navy">倫理的AIとプライバシー保護</h3>
+                        <p class="mt-2 text-brand-subtext">透明性と倫理性を担保するデータガバナンスと、プライバシー保護を最優先した技術コンサルティング。</p>
+                    </div>
+                </div>
+                <div class="mt-16 text-center">
+                    <a href="/solutions/index.html" class="bg-brand-primary text-white font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-brand-accent transition-transform hover:scale-105">
+                        全てのソリューションを見る
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- INSIGHTS Section -->
+        <section class="py-20 sm:py-28 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
+                    <h2 class="text-base font-semibold leading-7 text-brand-primary">INSIGHTS</h2>
+                    <p class="mt-2 text-3xl sm:text-4xl font-bold tracking-tight text-brand-navy">
+                        データサイエンスが拓く未来
+                    </p>
+                    <p class="mt-6 text-lg leading-8 text-brand-subtext">
+                        私たちの専門性と先進性を示す研究開発レポート、ホワイトペーパー、専門家コラムなど、最先端の知見と未来への提言を発信しています。
+                    </p>
+                </div>
+                <!-- Dummy Insight Posts -->
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <a href="/insights/index.html" class="block group p-6 rounded-lg hover:bg-brand-light-bg transition-colors">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                            <div>
+                                <p class="text-sm text-brand-subtext">2023.10.26・ホワイトペーパー</p>
+                                <h3 class="mt-1 text-xl font-semibold text-brand-navy group-hover:text-brand-primary">「生活者最適化」を実現する倫理的AIのフレームワーク</h3>
+                            </div>
+                            <span class="mt-4 sm:mt-0 text-brand-primary font-semibold">続きを読む →</span>
+                        </div>
+                    </a>
+                    <div class="border-t border-gray-200"></div>
+                     <a href="/insights/index.html" class="block group p-6 rounded-lg hover:bg-brand-light-bg transition-colors">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                            <div>
+                                <p class="text-sm text-brand-subtext">2023.09.15・コラム</p>
+                                <h3 class="mt-1 text-xl font-semibold text-brand-navy group-hover:text-brand-primary">Web行動ログから読み解く、次世代のパーソナライゼーション</h3>
+                            </div>
+                            <span class="mt-4 sm:mt-0 text-brand-primary font-semibold">続きを読む →</span>
+                        </div>
+                    </a>
+                    <div class="border-t border-gray-200"></div>
+                     <a href="/insights/index.html" class="block group p-6 rounded-lg hover:bg-brand-light-bg transition-colors">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                            <div>
+                                <p class="text-sm text-brand-subtext">2023.08.01・調査レポート</p>
+                                <h3 class="mt-1 text-xl font-semibold text-brand-navy group-hover:text-brand-primary">Society 5.0におけるデータ活用の現在地と未来展望</h3>
+                            </div>
+                            <span class="mt-4 sm:mt-0 text-brand-primary font-semibold">続きを読む →</span>
+                        </div>
+                    </a>
+                </div>
+                 <div class="mt-16 text-center">
+                    <a href="/insights/index.html" class="font-semibold text-brand-primary hover:text-brand-accent group">
+                        インサイト一覧を見る <span aria-hidden="true" class="inline-block transition-transform group-hover:translate-x-1">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="bg-brand-navy">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                        未来の共創パートナーを求めて
+                    </h2>
+                    <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-300">
+                        私たちのビジョンに共感し、データとAIでより豊かな社会を共に創造する仲間を募集しています。ビジネスパートナーシップから採用まで、お気軽にご連絡ください。
+                    </p>
+                    <div class="mt-10 flex items-center justify-center gap-x-6">
+                        <a href="/contact/index.html" class="bg-white text-brand-primary font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-gray-100 transition-colors">
+                            お問い合わせ
+                        </a>
+                        <a href="/collaboration/index.html" class="font-semibold text-white hover:text-gray-200 group">
+                            採用情報を見る <span aria-hidden="true" class="inline-block transition-transform group-hover:translate-x-1">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-navy text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <!-- 4カラム構造 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Column 1: Logo and About -->
+                <div class="col-span-2 md:col-span-1">
+                    <a href="/index.html" class="flex items-center space-x-2">
+                         <svg class="h-8 w-8 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12.75l9-9m0 0l-9 9m9-9v18m-9-9h18" />
+                        </svg>
+                        <span class="text-xl font-bold text-white tracking-tight">OptiLife Data Innovations</span>
+                    </a>
+                    <p class="mt-4 text-sm text-gray-300">データを通じて個人の可能性を最大化し、より豊かな社会を実現する。</p>
+                    <a href="/about/index.html" class="mt-4 inline-block text-sm font-medium text-gray-300 hover:text-white">会社概要 →</a>
+                </div>
+
+                <!-- Column 2: Sitemap -->
+                <div>
+                    <h3 class="text-sm font-semibold leading-6 text-white">サイトマップ</h3>
+                    <ul role="list" class="mt-4 space-y-3">
+                        <li><a href="/vision/index.html" class="text-sm text-gray-300 hover:text-white">理念・哲学</a></li>
+                        <li><a href="/solutions/index.html" class="text-sm text-gray-300 hover:text-white">ソリューション</a></li>
+                        <li><a href="/insights/index.html" class="text-sm text-gray-300 hover:text-white">インサイト</a></li>
+                        <li><a href="/collaboration/index.html" class="text-sm text-gray-300 hover:text-white">共創・採用</a></li>
+                        <li><a href="/news/index.html" class="text-sm text-gray-300 hover:text-white">ニュース</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Legal & Support -->
+                <div>
+                    <h3 class="text-sm font-semibold leading-6 text-white">サポート</h3>
+                    <ul role="list" class="mt-4 space-y-3">
+                        <li><a href="/contact/index.html" class="text-sm text-gray-300 hover:text-white">お問い合わせ</a></li>
+                        <li><a href="/legal/privacy-policy.html" class="text-sm text-gray-300 hover:text-white">プライバシーポリシー</a></li>
+                        <li><a href="/legal/site-policy.html" class="text-sm text-gray-300 hover:text-white">サイトポリシー</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Social (Dummy) -->
+                 <div>
+                    <h3 class="text-sm font-semibold leading-6 text-white">フォローする</h3>
+                    <div class="flex mt-4 space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><span class="sr-only">X (Twitter)</span><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><span class="sr-only">LinkedIn</span><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-16 pt-8 border-t border-white/10 text-center">
+                <p class="text-xs leading-5 text-gray-400">&copy; 2023 OptiLife Data Innovations. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
