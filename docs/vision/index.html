@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理念・哲学 | DataSphere Inc.</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        // トップページのデザインフレームを維持するためのカスタム設定
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#1e3a8a', // 濃い青 (信頼性、科学) - was 'primary': '#0D47A1'
+                        'secondary': '#3b82f6', // 明るい青 (先進性) - was 'secondary': '#42A5F5'
+                        'accent': '#06b6d4', // シアン (未来志向) - was 'accent': '#00BCD4'
+                        'text-base': '#1f2937', // 濃いグレー - was 'text-base': '#1A202C'
+                        'text-muted': '#6b7280', // 薄いグレー - was 'text-muted': '#718096'
+                        'bg-light': '#f9fafb', // 非常に薄いグレー - was 'bg-light': '#F7FAFC'
+                        'bg-dark': '#111827', // 濃いグレー（フッターなど） - was 'bg-dark': '#1A202C'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '"Noto Sans JP"', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* スムーススクロール */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* カスタムスタイル */
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-text-base antialiased">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-bold text-primary">DataSphere Inc.</a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center space-x-8">
+                <a href="../index.html" class="text-text-muted hover:text-primary transition-colors duration-300">ホーム</a>
+                <a href="index.html" class="text-primary font-semibold border-b-2 border-primary">理念・哲学</a>
+                <div class="relative group">
+                    <button class="text-text-muted hover:text-primary transition-colors duration-300 focus:outline-none">
+                        ソリューション <span class="text-xs">▼</span>
+                    </button>
+                    <div class="absolute -left-8 mt-2 w-60 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-10">
+                        <a href="../solutions/index.html" class="block px-4 py-2 text-text-muted hover:bg-bg-light hover:text-primary">ソリューション概要</a>
+                        <a href="../solutions/individual.html" class="block px-4 py-2 text-text-muted hover:bg-bg-light hover:text-primary">個人向けサービス</a>
+                        <a href="../solutions/partner.html" class="block px-4 py-2 text-text-muted hover:bg-bg-light hover:text-primary">パートナーソリューション</a>
+                        <a href="../solutions/case-studies.html" class="block px-4 py-2 text-text-muted hover:bg-bg-light hover:text-primary">導入事例</a>
+                    </div>
+                </div>
+                <a href="../insights/index.html" class="text-text-muted hover:text-primary transition-colors duration-300">知見・洞察</a>
+                <a href="../collaboration/index.html" class="text-text-muted hover:text-primary transition-colors duration-300">協業・採用</a>
+            </nav>
+
+            <div class="hidden lg:flex items-center">
+                <a href="../contact/index.html" class="bg-primary hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-full transition-colors duration-300">お問い合わせ</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="lg:hidden focus:outline-none">
+                <svg class="w-6 h-6 text-text-base" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden">
+            <nav class="px-4 pt-2 pb-4 space-y-2">
+                <a href="../index.html" class="block px-4 py-2 rounded text-text-muted hover:bg-bg-light hover:text-primary">ホーム</a>
+                <a href="index.html" class="block px-4 py-2 rounded bg-bg-light text-primary font-semibold">理念・哲学</a>
+                <a href="../solutions/index.html" class="block px-4 py-2 rounded text-text-muted hover:bg-bg-light hover:text-primary">ソリューション</a>
+                <a href="../insights/index.html" class="block px-4 py-2 rounded text-text-muted hover:bg-bg-light hover:text-primary">知見・洞察</a>
+                <a href="../collaboration/index.html" class="block px-4 py-2 rounded text-text-muted hover:bg-bg-light hover:text-primary">協業・採用</a>
+                <a href="../contact/index.html" class="block mt-4 w-full text-center bg-primary hover:bg-blue-800 text-white font-bold py-2 px-6 rounded-full transition-colors duration-300">お問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-primary to-blue-900 text-white">
+            <div class="container mx-auto px-6 py-24 md:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-black tracking-tight">理念・哲学</h1>
+                <p class="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-blue-100">
+                    データとAIが拓く、倫理的かつパーソナルな未来。
+                    私たちの存在意義、使命、そして目指す社会像をここに示します。
+                </p>
+            </div>
+        </section>
+
+        <!-- Our Philosophy Section (Purpose, Mission, Vision) -->
+        <section class="py-20 md:py-28 bg-bg-light">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-text-base">私たちの哲学</h2>
+                    <p class="mt-4 text-lg text-text-muted">社会と個人に対する私たちのコミットメント</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <!-- Purpose -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="inline-block p-4 bg-blue-100 rounded-full mb-4">
+                            <svg class="w-10 h-10 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M12 6v6l4 2" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-primary mb-2">パーパス (存在意義)</h3>
+                        <p class="text-text-muted leading-relaxed">
+                            データとAIの力で個人の可能性とQOLを最大化し、より豊かな社会を実現すること。
+                        </p>
+                    </div>
+                    <!-- Mission -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                        <div class="inline-block p-4 bg-cyan-100 rounded-full mb-4">
+                            <svg class="w-10 h-10 text-accent" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-accent mb-2">ミッション (現在の使命)</h3>
+                        <p class="text-text-muted leading-relaxed">
+                            Web上のライフログをAIで解析し、消費、健康、学習、キャリアの最適な選択肢を、透明性と倫理性を担保し提供する。
+                        </p>
+                    </div>
+                    <!-- Vision -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                         <div class="inline-block p-4 bg-blue-100 rounded-full mb-4">
+                            <svg class="w-10 h-10 text-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-secondary mb-2">ビジョン (目指す未来像)</h3>
+                        <p class="text-text-muted leading-relaxed">
+                            データによって個人の可能性が最大限に引き出され、誰もが質の高い生活を送る豊かな社会が実現されている状態。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scientific Foundation Section -->
+        <section class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-text-base">Webデータ分析の科学的根拠</h2>
+                    <p class="mt-4 text-lg text-text-muted leading-relaxed">
+                        Society 5.0における個人のQOL向上と最適な意思決定支援の重要性は、日々増しています。私たちのパーパスを実現する根幹には、Webライフログを多角的に解析する科学的アプローチが存在します。ここでは、その論理的・実証的基盤を解説します。
+                    </p>
+                </div>
+
+                <!-- Part 1: Scientific Basis -->
+                <div class="mt-20">
+                    <h3 class="text-2xl md:text-3xl font-bold text-primary text-center mb-12">多角的なライフログデータ解析：その科学的基盤</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                        <div class="flex flex-col items-center text-center">
+                            <div class="bg-primary/10 p-4 rounded-full mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4M4 7s0 0 .001 0" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12a4 4 0 100-8 4 4 0 000 8z" /></svg>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">データの収集と構造化</h4>
+                            <p class="text-text-muted">ユーザーの明確な許諾に基づき、匿名化されたWeb上の多様なライフログを収集。高度なデータエンジニアリング技術を用いて、AIが解釈可能な構造化データへと変換し、分析の基盤を構築します。</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <div class="bg-primary/10 p-4 rounded-full mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">先端AIモデルによるパターン認識</h4>
+                            <p class="text-text-muted">機械学習、深層学習、自然言語処理などの先端AI技術を駆使し、個人の行動や潜在的ニーズを予測・分析。パーソナライズエンジンの核として、一人ひとりに最適化された示唆を提供します。</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <div class="bg-primary/10 p-4 rounded-full mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">行動経済学・認知科学との融合</h4>
+                            <p class="text-text-muted">データ解析の結果を、単なる情報提供で終わらせません。行動経済学や認知科学の知見を統合し、個人の最適な意思決定を支援するための効果的な「伝え方」や「タイミング」を設計します。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Part 2: PDCA Cycle -->
+                <div class="mt-24 md:mt-32">
+                    <div class="lg:flex lg:items-center lg:gap-12">
+                        <div class="lg:w-1/2">
+                            <h3 class="text-2xl md:text-3xl font-bold text-primary">個別最適化の精度を保証する、当社のデータサイエンスPDCA</h3>
+                            <p class="mt-4 text-text-muted leading-relaxed">
+                                私たちの提供するパーソナライズは、一度きりの分析で完結しません。継続的な改善を続けるデータサイエンスPDCAサイクルこそが、提供価値の精度と効果を保証する原動力です。この科学的プロセスにより、モデルは常に進化し、ユーザーにとっての価値を最大化し続けます。
+                            </p>
+                            <ul class="mt-6 space-y-4 text-text-muted">
+                                <li class="flex items-start">
+                                    <svg class="flex-shrink-0 h-6 w-6 text-accent mt-1 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-4a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    <span><strong>モデルの継続的評価:</strong> 定期的な予測精度評価とバックテストにより、モデルの健全性を常に監視します。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="flex-shrink-0 h-6 w-6 text-accent mt-1 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-4a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    <span><strong>実証的な効果検証:</strong> A/Bテストや多変量テストを通じて、提案がユーザー行動に与える影響を客観的かつ定量的に測定・検証します。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="flex-shrink-0 h-6 w-6 text-accent mt-1 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6-4a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    <span><strong>フィードバックループ:</strong> ユーザーからの定性的フィードバックと定量的データを組み合わせ、モデルとサービスの改善に迅速に反映させます。</span>
+                                </li>
+                            </ul>
+                            <a href="../solutions/index.html" class="inline-block mt-8 bg-secondary hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition-colors duration-300">
+                                私たちのソリューションを見る
+                            </a>
+                        </div>
+                        <div class="lg:w-1/2 mt-10 lg:mt-0">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1470&auto=format&fit=crop" alt="Data science process chart" class="rounded-lg shadow-2xl object-cover w-full h-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ethics and Transparency Section -->
+        <section class="py-20 md:py-28 bg-bg-light">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto bg-gradient-to-r from-primary to-secondary p-8 md:p-12 rounded-2xl shadow-xl text-white">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center">倫理的データ利用と透明性：信頼の基盤</h2>
+                    <p class="mt-6 text-lg text-blue-100 leading-relaxed text-center">
+                        私たちのパーパス実現において、倫理と透明性は決して妥協できない基盤です。データは人々の生活を豊かにするためにあり、その利用は常に人間中心でなければなりません。私たちは、データ収集から解析、サービス提供に至る全過程で、以下の原則を厳守することを約束します。
+                    </p>
+                    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="glassmorphism rounded-lg p-6">
+                            <h4 class="font-semibold text-xl mb-2">プライバシー・バイ・デザイン</h4>
+                            <p class="text-blue-200">サービス設計の初期段階からプライバシー保護を組み込み、個人を特定できないよう匿名化・統計化処理を徹底します。</p>
+                        </div>
+                        <div class="glassmorphism rounded-lg p-6">
+                            <h4 class="font-semibold text-xl mb-2">透明性と選択の自由</h4>
+                            <p class="text-blue-200">データ利用の目的と範囲を明確に開示し、ユーザーが自身のデータを管理・制御できる選択肢を常に提供します。</p>
+                        </div>
+                        <div class="glassmorphism rounded-lg p-6">
+                            <h4 class="font-semibold text-xl mb-2">公平性とバイアス排除</h4>
+                            <p class="text-blue-200">AIモデルが特定の属性に対して不利益な判断を下さないよう、アルゴリズムの公平性を定期的に監査し、バイアスを継続的に是正します。</p>
+                        </div>
+                        <div class="glassmorphism rounded-lg p-6">
+                            <h4 class="font-semibold text-xl mb-2">倫理的AI開発ガイドライン</h4>
+                            <p class="text-blue-200">社内外の専門家と連携し、独自の倫理的AI開発ガイドラインを策定・遵守。社会に貢献するAIのあり方を追求し続けます。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-bg-dark text-white">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Column 1: Company Info -->
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="text-2xl font-bold">DataSphere Inc.</h3>
+                    <p class="mt-4 text-text-muted">データとAIの力で個人の可能性とQOLを最大化し、より豊かな社会を実現する。</p>
+                    <p class="mt-4 text-sm text-text-muted">〒100-0005 東京都千代田区丸の内1-1-1</p>
+                </div>
+
+                <!-- Column 2: Sitemap -->
+                <div>
+                    <h4 class="text-lg font-semibold tracking-wider uppercase">サイトマップ</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="../index.html" class="text-text-muted hover:text-white transition-colors">ホーム</a></li>
+                        <li><a href="index.html" class="text-text-muted hover:text-white transition-colors">理念・哲学</a></li>
+                        <li><a href="../insights/index.html" class="text-text-muted hover:text-white transition-colors">知見・洞察</a></li>
+                        <li><a href="../collaboration/index.html" class="text-text-muted hover:text-white transition-colors">協業・採用</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Solutions -->
+                <div>
+                    <h4 class="text-lg font-semibold tracking-wider uppercase">ソリューション</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="../solutions/index.html" class="text-text-muted hover:text-white transition-colors">ソリューション概要</a></li>
+                        <li><a href="../solutions/individual.html" class="text-text-muted hover:text-white transition-colors">個人向けサービス</a></li>
+                        <li><a href="../solutions/partner.html" class="text-text-muted hover:text-white transition-colors">パートナーソリューション</a></li>
+                        <li><a href="../solutions/case-studies.html" class="text-text-muted hover:text-white transition-colors">導入事例</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Legal & Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold tracking-wider uppercase">その他</h4>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="../contact/index.html" class="text-text-muted hover:text-white transition-colors">お問い合わせ</a></li>
+                        <li><a href="../legal/privacy-policy.html" class="text-text-muted hover:text-white transition-colors">プライバシーポリシー</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-16 border-t border-gray-700 pt-8 text-center text-text-muted">
+                <p>&copy; 2024 DataSphere Inc. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+</html>
