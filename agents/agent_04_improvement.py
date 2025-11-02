@@ -8,6 +8,7 @@ from google.genai import types
 
 # (analyze_article_structure, generate_article_purpose は変更なし)
 def analyze_article_structure(file_path):
+    """HTMLファイルを読み込み、タイトル、見出し構造、本文テキストを抽出する。"""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -31,6 +32,7 @@ def analyze_article_structure(file_path):
         return None, f"❌ 解析エラー: {e}"
 
 def generate_article_purpose(client, article_data, identity):
+    """記事の構造とテキストを分析し、戦略的目的 (Purpose) を生成する。"""
     if client is None: return "❌ クライアント未設定"
     prompt = f"""
     あなたは、Webサイトのコンテンツ戦略家です。
@@ -53,40 +55,49 @@ def generate_article_purpose(client, article_data, identity):
     except Exception as e:
         return f"❌ AI生成失敗: {e}"
 
-def select_priority_section_by_data(client, df_all_data, identity, target_pages_list):
+# ⬇️ [修正] AIの「Vision偏愛」を治すため、プロンプトを「戦略的バランス」重視に変更
+def select_priority_section_by_data(client, df_all_data, identity, target_pages_list, balance_report):
+    """
+    AIの「偏愛」を防ぐため、サイトの「記事数バランス」を数値化し、
+    AIに最も記事が少ないハブを選定させる。
+    """
     if client is None:
-        return {'file_name': 'vision/index.html', 'reason': 'クライアント未設定のため、戦略的基盤であるVISIONをフォールバックしました。'}
+        return {'file_name': 'solutions/index.html', 'reason': 'クライアント未設定のため、戦略的基盤であるSOLUTIONSをフォールバックしました。'}
+    
     data_markdown = df_all_data.to_markdown()
-
+    
+    # 目的リストもプロンプトに含める（参考情報として）
     df_target_pages_data = []
     for p in target_pages_list:
-        df_target_pages_data.append({
+         df_target_pages_data.append({
             "file_name": p.get('file_name'),
             "title": p.get('title'),
-            "summary": p.get('generated_purpose', p.get('summary', ''))
+            "summary": p.get('summary', p.get('generated_purpose', '')) 
         })
     df_target_pages = pd.DataFrame(df_target_pages_data)
 
+    # --- [修正] 新しい「戦略的バランス」重視のプロンプト ---
     prompt = f"""
-    あなたはデータ駆動型のコンテンツ戦略責任者です。以下の情報を分析し、**サイト全体の戦略的バランスと信頼性の最大化**の観点から、次にリソースを投入すべきセクションを1つだけ選定してください。
+    あなたはデータ駆動型のコンテンツ戦略責任者です。以下の情報を分析し、**サイト全体の戦略的バランス**の観点から、次にリソースを投入すべきセクションを1つだけ選定してください。
 
     ### 貴社の目標と戦略的重み
-    1. **戦略的貢献度の評価:** 各ページが、貴社の**パーパス（法人格）**達成にどの程度重要か評価してください。
-    2. **欠損領域の特定:** パフォーマンスデータが均一なため、現在の**コンテンツの目的（summary）**が、その戦略的貢献度に見合うだけの深さや専門性を欠いているセクション（**論理的な欠損**）を特定してください。
+    1. **戦略的バランスの分析:** 以下の「サイトの戦略的バランス（現状の記事数）」レポートを分析してください。
+    2. **選定基準:** 「理念（VISION）」セクションは既に充実している可能性が高いです。**記事数が最も少ない**、または VISION との差が最も大きい**コア戦略セクション**（例: SOLUTIONS, INSIGHTS）を選定してください。
+    3. **除外対象:** ユーティリティページ（legal/, contact/）は選定対象から除外してください。
 
-    ### 🚨 最重要ルール：選定対象の限定 🚨
-    - 選定する「file_name」は、**必ず各セクションのハブページ（`index.html`で終わるファイル）**の中から選んでください。
-    - ユーティリティページ（legal/ や contact/）は優先度を極端に低くしてください。
-    - **詳細記事（例: ...-7.html や article-1.html）を選んではいけません。** コアな戦略領域の `index.html` の中から選んでください。
+    ### サイトの戦略的バランス（現状の記事数）
+    {balance_report}
 
     ### 法人格
     {identity}
-    ### 分析対象ページリスト (ファイル名と目的)
+
+    ### 分析対象ページリスト (参考: 全ページの目的)
     {df_target_pages.to_markdown(index=False)}
-    ### パフォーマンスデータ (データが均一なため、戦略的論理を優先)
+
+    ### パフォーマンスデータ (参考: データは均一)
     {data_markdown}
     ---
-    回答は以下のJSON形式のみで出力し、理由には**「なぜそのセクションがサイトの信頼性と説得力の向上に最も貢献するか」**を記述してください。
+    回答は以下のJSON形式のみで出力し、理由には**「なぜそのセクションが戦略的バランスの観点から最適か」**を記述してください。
     {{"file_name": "[選定したファイル名]", "reason": "[選定した論理的根拠を記述]"}}
     """
 
@@ -100,21 +111,22 @@ def select_priority_section_by_data(client, df_all_data, identity, target_pages_
         if any(p.get('file_name') == parsed_json.get('file_name') for p in target_pages_list):
             return parsed_json
         else:
-            return {'file_name': 'vision/index.html', 'reason': 'AIの選定結果が不適切なため、戦略的基盤であるVISIONをフォールバックしました。'}
+            # [修正] フォールバック先を vision ではなく solutions に変更
+            return {'file_name': 'solutions/index.html', 'reason': 'AIの選定結果が不適切なため、次に重要なSOLUTIONSをフォールバックしました。'}
     except Exception as e:
         print(f"❌ AI選定エラー: {e}")
-        return {'file_name': 'vision/index.html', 'reason': 'API接続エラーまたはJSONパース失敗のため、戦略的基盤であるVISIONをフォールバックします。'}
+        return {'file_name': 'solutions/index.html', 'reason': 'API接続エラーまたはJSONパース失敗のため、SOLUTIONSをフォールバックします。'}
 
-# ⬇️ ここが修正された関数です
+# ⬇️ [修正] KeyError: 'generated_purpose' を防ぐため、両方のキーに対応
 def generate_priority_article_titles(client, section_info, identity, count, start_number):
     """
     最優先セクションの目的を満たす、具体的な記事タイトル、要約、スラッグを企画する。
     """
     if client is None: return "❌ Geminiクライアントが初期化されていません。", []
-
-    # [修正] 'generated_purpose' と 'summary' の両方に対応
-    section_purpose = section_info.get('generated_purpose', section_info.get('summary', ''))
-
+    
+    # ⬅️ [修正] 'generated_purpose' と 'summary' の両方に対応
+    section_purpose = section_info.get('summary', section_info.get('generated_purpose', ''))
+    
     prompt = f"""
     あなたは、SEOとデータサイエンスの専門家です。
     以下の「法人のアイデンティティ」と「最優先セクションの戦略的目的」に基づき、その目的に最も貢献する**具体的かつ専門性の高い記事タイトル、要約、SEOスラッグ（ファイル名）**を {count} 件生成してください。
@@ -126,7 +138,7 @@ def generate_priority_article_titles(client, section_info, identity, count, star
 
     ### 最優先セクションの戦略的目的
     {section_info['title']} ({section_info['file_name']})
-    目的: {section_purpose}
+    目的: {section_purpose} 
 
     ### 法人格
     {identity}

@@ -44,6 +44,7 @@ def setup_client():
         print(f"❌ クライアント初期化エラー: {e}")
         return None
 
+# ⬇️ [修正] 法人格をファイルから読み込むように変更
 def load_corporate_identity():
     """
     'main_01' が保存した法人格レポートをファイルから読み込む。
@@ -63,6 +64,7 @@ def load_corporate_identity():
                 RAW_VISION_INPUT = f.read()
             client = setup_client()
             if client:
+                print("⚠️ [フォールバック] 法人格をAPIで再生成します。")
                 return generate_corporate_identity(client, RAW_VISION_INPUT)
             else:
                 raise Exception("クライアントの初期化に失敗")
@@ -71,7 +73,7 @@ def load_corporate_identity():
             return "パーパス: データによる個人の生活最適化。 トーン: 論理的、先進的。"
 
 def main():
-    print(f"--- 🔄 HP改善サイクル (フェーズ5-8) [分析・新規生成モード] 開始 ---")
+    print(f"--- 🔄 HP改善サイクル (フェーズ5-8) [戦略的バランスモード] 開始 ---")
 
     # --- 0. クライアント初期化 ---
     gemini_client = setup_client()
@@ -84,7 +86,6 @@ def main():
     print(f"\n--- [フェーズ5a: AS-IS分析] 計画ファイル ({REPORT_FILE}) を読み込み中 ---")
     processed_articles = None
     if os.path.exists(REPORT_FILE):
-        # ⬇️ [修正] 'summary' キーで読み込まれる
         processed_articles = load_markdown_table_to_list(REPORT_FILE)
 
     if processed_articles:
@@ -111,12 +112,48 @@ def main():
                             "summary": purpose # ⬅️ [修正] 'summary' キーで保存
                         })
         print(f"\n✅ [フェーズ5a 代替完了] 合計 {len(processed_articles)} 件の目的をAPIで再定義しました。")
+        
+    # ⬇️ [修正] 5a-2. 「戦略的バランス」の数値化
+    print(f"\n--- [フェーズ5a-2: 戦略的バランスの分析] ---")
+    hub_counts = {}
+    all_hubs = []
+    
+    # 1. ハブを特定
+    for p in processed_articles:
+        if p.get('file_name', '').endswith('index.html'):
+            hub_counts[p['file_name']] = 0 # カウントを0で初期化
+            all_hubs.append(p['file_name'])
+
+    # 2. ハブ配下の記事をカウント
+    for p in processed_articles:
+        if not p.get('file_name', '').endswith('index.html'):
+            parent_dir = os.path.dirname(p.get('file_name', ''))
+            parent_hub = os.path.join(parent_dir, 'index.html').replace(os.path.sep, '/')
+            if parent_hub in hub_counts:
+                hub_counts[parent_hub] += 1
+    
+    # 3. AIに渡すためのバランスレポートを作成
+    balance_report = "| ハブページ | 配下の詳細記事数 |\n| :--- | :--- |\n"
+    print("✅ 現在のサイトバランス:")
+    for hub, count in hub_counts.items():
+        # ユーティリティページはレポートから除外
+        if 'legal/' not in hub and 'contact/' not in hub and 'about-us/' not in hub:
+             balance_report += f"| {hub} | {count} |\n"
+             print(f"  - {hub}: {count} 件")
+    # ⬆️ [修正] ここまで
 
     # --- 5b. 戦略的優先度の決定 ---
     print("\n--- [フェーズ5b: 戦略的優先度の決定] AIが分析中 ---")
     df_all_data = create_placeholder_data(processed_articles)
-    # ⬇️ [修正] 'summary' キーを持つリストを渡す
-    priority_result = select_priority_section_by_data(gemini_client, df_all_data, CORPORATE_IDENTITY, processed_articles)
+    
+    # ⬇️ [修正] 'balance_report' を引数として渡す
+    priority_result = select_priority_section_by_data(
+        gemini_client, 
+        df_all_data, 
+        CORPORATE_IDENTITY, 
+        processed_articles,
+        balance_report # ⬅️ バランスレポートを渡す
+    )
 
     priority_file = priority_result['file_name']
     priority_section_info = next(p for p in processed_articles if p['file_name'] == priority_file)
@@ -128,6 +165,7 @@ def main():
     # --- 6. 詳細記事の企画 ---
     print("\n--- [フェーズ6: 詳細記事の企画] AIが企画中 ---")
     start_number = get_existing_article_count(BASE_DIR) + 1
+    
     # ⬇️ [修正] 'summary' キーを持つ辞書を渡す
     error_msg, article_plans = generate_priority_article_titles(
         gemini_client, priority_section_info, CORPORATE_IDENTITY, DEFAULT_ARTICLE_COUNT, start_number
@@ -163,7 +201,7 @@ def main():
             {
                 "file_name": p['file_name'],
                 "title": p['title'],
-                "purpose": p.get('summary', p.get('generated_purpose', '')) # ⬅️ [修正] 'summary' 優先
+                "purpose": p.get('summary', p.get('generated_purpose', '')) 
             } for p in processed_articles
         ]
 
@@ -187,7 +225,7 @@ def main():
             except Exception as e:
                 print(f"❌ [本番生成] ファイル作成失敗: {e}")
         else:
-             print(f"❌ [本番生成] HTMLコード生成失敗: {file_name}")
+            print(f"❌ [本番生成] HTMLコード生成失敗: {file_name}")
 
     # --- 8. ハブページの自動更新 ---
     print(f"\n--- [フェーズ8: ハブページの自動更新] ---")
@@ -208,13 +246,13 @@ def main():
     parent_page_info_for_regeneration = {
         'file_name': parent_page_info['file_name'],
         'title': parent_page_info['title'],
-        'purpose': parent_page_info.get('summary', parent_page_info.get('generated_purpose')) # ⬅️ [修正] 'summary' 優先
+        'purpose': parent_page_info.get('summary', parent_page_info.get('generated_purpose')) 
     }
 
     all_articles_in_section = []
     for plan in all_content_plans:
-         if (os.path.dirname(plan['file_name']) == hub_dir) and \
-            (plan['file_name'] != hub_path_to_update):
+        if (os.path.dirname(plan['file_name']) == hub_dir) and \
+           (plan['file_name'] != hub_path_to_update):
             all_articles_in_section.append(plan)
 
     print(f"  -> {len(all_articles_in_section)} 件の詳細記事（新旧含む）をスキャンしました。")
@@ -225,7 +263,7 @@ def main():
     else:
         for plan in all_articles_in_section:
             link_path = os.path.basename(plan['file_name'])
-            article_summary = plan.get('summary', plan.get('generated_purpose', '')) # ⬅️ [修正] 'summary' 優先
+            article_summary = plan.get('summary', plan.get('generated_purpose', '')) 
             new_article_links_html += f"<li><a href='{link_path}' class='text-blue-500 hover:underline'>{plan['title']}</a>: {article_summary}</li>"
         new_article_links_html += "</ul>"
 
@@ -241,7 +279,7 @@ def main():
         {
             "file_name": p['file_name'],
             "title": p['title'],
-            "purpose": p.get('summary', p.get('generated_purpose', '')) # ⬅️ [修正] 'summary' 優先
+            "purpose": p.get('summary', p.get('generated_purpose', '')) 
         } for p in all_content_plans
     ]
 
