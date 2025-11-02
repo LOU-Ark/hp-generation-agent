@@ -6,6 +6,7 @@ from google import genai
 # from IPython.display import display, Markdown # .pyファイルからは削除
 
 # モジュールをインポート
+from agents.agent_03_generation import generate_single_page_html
 from agents.agent_04_improvement import (
     analyze_article_structure,
     generate_article_purpose,
@@ -15,12 +16,13 @@ from agents.agent_04_improvement import (
 from utils.file_utils import (
     get_existing_article_count,
     integrate_content_data,
-    save_to_markdown
+    save_to_markdown,
+    load_markdown_table_to_list
 )
 from utils.analysis_utils import create_placeholder_data
 
 # --- 0. 設定 ---
-BASE_DIR = "output_website/PEOPLE-OPT-Unified-Site" # 分析対象（フェーズ4の出力）
+BASE_DIR = "docs"
 REPORTS_DIR = "output_reports"
 REPORT_FILE = os.path.join(REPORTS_DIR, "planned_articles.md")
 DEFAULT_ARTICLE_COUNT = 3
@@ -44,70 +46,76 @@ def setup_client():
 
 def load_corporate_identity():
     """
-    (仮) 法人格をロードする。
-    実際には main_01 の出力（例: JSONファイル）からロードすべきだが、
-    ここでは main_01 を再実行して取得する簡易的な方法をとる。
+    'main_01' が保存した法人格レポートをファイルから読み込む。
     """
+    identity_file = os.path.join(REPORTS_DIR, "01_corporate_identity.md")
     try:
-        from agents.agent_01_identity import generate_corporate_identity
-        with open("config/opinion.txt", 'r', encoding='utf-8') as f:
-            RAW_VISION_INPUT = f.read()
-        client = setup_client() # このためだけにクライアントを起動
-        if client:
-            # generate_corporate_identity は print するので、ここでは出力を抑制
-            # print("法人格を再生成しています...")
-            return generate_corporate_identity(client, RAW_VISION_INPUT)
-        else:
-            raise Exception("クライアントの初期化に失敗")
+        with open(identity_file, 'r', encoding='utf-8') as f:
+            identity = f.read()
+        print(f"✅ 法人格を {identity_file} から読み込みました。")
+        return identity
     except Exception as e:
-        print(f"警告: 法人格の動的ロードに失敗: {e}。ダミーを使用します。")
-        return "パーパス: データによる個人の生活最適化。 トーン: 論理的、先進的。"
-
+        print(f"❌ 法人格ファイル ({identity_file}) の読み込みに失敗: {e}")
+        # (フォールバック)
+        try:
+            from agents.agent_01_identity import generate_corporate_identity
+            with open("config/opinion.txt", 'r', encoding='utf-8') as f:
+                RAW_VISION_INPUT = f.read()
+            client = setup_client()
+            if client:
+                return generate_corporate_identity(client, RAW_VISION_INPUT)
+            else:
+                raise Exception("クライアントの初期化に失敗")
+        except Exception as e_fallback:
+            print(f"❌ 代替処理も失敗: {e_fallback}。ダミーを使用します。")
+            return "パーパス: データによる個人の生活最適化。 トーン: 論理的、先進的。"
 
 def main():
-    print("--- 🔄 HP改善サイクルエージェント (フェーズ5-6) 開始 ---")
+    print(f"--- 🔄 HP改善サイクル (フェーズ5-8) [分析・新規生成モード] 開始 ---")
 
     # --- 0. クライアント初期化 ---
     gemini_client = setup_client()
-    if gemini_client is None:
-        sys.exit(1)
+    if gemini_client is None: sys.exit(1)
 
     # --- (前提) 法人格の取得 ---
     CORPORATE_IDENTITY = load_corporate_identity()
-    print("✅ 法人格をロードしました。")
 
-    # --- 5a. 戦略（AS-IS分析） ---
-    print("\n--- [フェーズ5a: AS-IS分析] 既存サイトをスキャン中 ---")
-    processed_articles = []
-    TARGET_EXTENSIONS = ('.html', '.htm')
+    # --- 5a. 戦略（AS-IS分析）---
+    print(f"\n--- [フェーズ5a: AS-IS分析] 計画ファイル ({REPORT_FILE}) を読み込み中 ---")
+    processed_articles = None
+    if os.path.exists(REPORT_FILE):
+        # ⬇️ [修正] 'summary' キーで読み込まれる
+        processed_articles = load_markdown_table_to_list(REPORT_FILE)
 
-    if not os.path.isdir(BASE_DIR):
-        print(f"❌ 分析対象ディレクトリ {BASE_DIR} が見つかりません。")
-        print("先に main_01_initial_build.py を実行してください。")
-        sys.exit(1)
-
-    for root, _, files in os.walk(BASE_DIR):
-        for filename in files:
-            if filename.lower().endswith(TARGET_EXTENSIONS):
-                full_path = os.path.join(root, filename)
-                article_data, error = analyze_article_structure(full_path)
-
-                if article_data:
-                    purpose = generate_article_purpose(gemini_client, article_data, CORPORATE_IDENTITY)
-                    processed_articles.append({
-                        "file_name": os.path.relpath(full_path, BASE_DIR).replace(os.path.sep, '/'),
-                        "title": article_data['page_title'],
-                        "generated_purpose": purpose
-                    })
-                    print(f"✅ {processed_articles[-1]['file_name'].ljust(40)}: Purpose生成完了。")
-                else:
-                    print(f"❌ {filename.ljust(40)}: {error}")
-
-    print(f"\n✅ [フェーズ5a 完了] 合計 {len(processed_articles)} 件の目的を定義しました。")
+    if processed_articles:
+        print(f"✅ 既存の計画ファイルから {len(processed_articles)} 件の目的を読み込みました。（APIコールをスキップ）")
+    else:
+        # (フォールバック)
+        print(f"⚠️ 計画ファイルが見つからないか、読み込みに失敗しました。")
+        print(f"--- [フェーズ5a 代替] 既存サイト ({BASE_DIR}) をスキャン中 ---")
+        processed_articles = []
+        TARGET_EXTENSIONS = ('.html', '.htm')
+        if not os.path.isdir(BASE_DIR):
+            print(f"❌ 分析対象ディレクトリ {BASE_DIR} が見つかりません。")
+            sys.exit(1)
+        for root, _, files in os.walk(BASE_DIR):
+            for filename in files:
+                if filename.lower().endswith(TARGET_EXTENSIONS):
+                    full_path = os.path.join(root, filename)
+                    article_data, error = analyze_article_structure(full_path)
+                    if article_data:
+                        purpose = generate_article_purpose(gemini_client, article_data, CORPORATE_IDENTITY)
+                        processed_articles.append({
+                            "file_name": os.path.relpath(full_path, BASE_DIR).replace(os.path.sep, '/'),
+                            "title": article_data['page_title'],
+                            "summary": purpose # ⬅️ [修正] 'summary' キーで保存
+                        })
+        print(f"\n✅ [フェーズ5a 代替完了] 合計 {len(processed_articles)} 件の目的をAPIで再定義しました。")
 
     # --- 5b. 戦略的優先度の決定 ---
     print("\n--- [フェーズ5b: 戦略的優先度の決定] AIが分析中 ---")
     df_all_data = create_placeholder_data(processed_articles)
+    # ⬇️ [修正] 'summary' キーを持つリストを渡す
     priority_result = select_priority_section_by_data(gemini_client, df_all_data, CORPORATE_IDENTITY, processed_articles)
 
     priority_file = priority_result['file_name']
@@ -117,9 +125,10 @@ def main():
     print(f"🥇 最優先セクション: {priority_section_info['title']} (`{priority_file}`)")
     print(f"🔑 選定理由: {priority_result['reason']}")
 
-    # --- 6. 詳細記事の企画・生成 ---
-    print("\n--- [フェーズ6: 詳細記事の企画・生成] AIが企画中 ---")
+    # --- 6. 詳細記事の企画 ---
+    print("\n--- [フェーズ6: 詳細記事の企画] AIが企画中 ---")
     start_number = get_existing_article_count(BASE_DIR) + 1
+    # ⬇️ [修正] 'summary' キーを持つ辞書を渡す
     error_msg, article_plans = generate_priority_article_titles(
         gemini_client, priority_section_info, CORPORATE_IDENTITY, DEFAULT_ARTICLE_COUNT, start_number
     )
@@ -130,34 +139,136 @@ def main():
 
     print(f"✅ [フェーズ6 完了] {len(article_plans)} 件の新規記事を企画しました。")
 
-    # --- 7. (シミュレーション) ファイル生成と全体計画の保存 ---
-    print("\n--- [最終処理: ファイル生成シミュレーションと計画保存] ---")
+    # --- 7. (本番) 詳細記事のHTML生成 ---
+    print("\n--- [フェーズ7: 詳細記事のHTML生成] ---")
 
-    # フォルダパスを修正し、ファイル名を 'file_name' に統一
-    generate_file_list_paths = []
+    new_article_files_generated = []
+
     for i, plan in enumerate(article_plans):
         target_dir = os.path.dirname(priority_section_info['file_name'])
         file_name = os.path.join(target_dir, plan.get('file_name', f'error-slug-{i}.html'))
         file_name = file_name.replace(os.path.sep, '/')
 
-        # article_plans 自体を正しいパスに更新
         article_plans[i]['file_name'] = file_name
-        generate_file_list_paths.append(file_name)
 
-    # (シミュレーション) ファイルをtouch
-    for file_name in generate_file_list_paths:
-        generate_file_path = os.path.join(BASE_DIR, file_name)
-        os.makedirs(os.path.dirname(generate_file_path), exist_ok=True)
-        try:
-            with open(generate_file_path, 'w', encoding='utf-8') as f:
-                f.write(f"<html><title>{plan['title']}</title><body><h1>{plan['title']}</h1><p>{plan['summary']}</p></body></html>")
-            print(f"✅ (シミュレーション) ファイル作成成功: {generate_file_path}")
-        except Exception as e:
-            print(f"❌ (シミュレーション) ファイル作成失敗: {e}")
+        print(f"\n--- 🏭 [本番生成] {plan['title']} ---")
 
-    # (レポート) 全体計画をMDファイルに保存
-    os.makedirs(REPORTS_DIR, exist_ok=True)
+        target_page_for_generation = {
+            'title': plan['title'],
+            'file_name': file_name,
+            'purpose': plan['summary']
+        }
+
+        nav_list_for_generation = [
+            {
+                "file_name": p['file_name'],
+                "title": p['title'],
+                "purpose": p.get('summary', p.get('generated_purpose', '')) # ⬅️ [修正] 'summary' 優先
+            } for p in processed_articles
+        ]
+
+        final_html_code = generate_single_page_html(
+            gemini_client,
+            target_page_for_generation,
+            CORPORATE_IDENTITY,
+            None,
+            nav_list_for_generation,
+            retry_attempts=3
+        )
+
+        if "❌" not in final_html_code:
+            generate_file_path = os.path.join(BASE_DIR, file_name)
+            os.makedirs(os.path.dirname(generate_file_path), exist_ok=True)
+            try:
+                with open(generate_file_path, 'w', encoding='utf-8') as f:
+                    f.write(final_html_code)
+                print(f"✅ [本番生成] ファイル作成成功: {generate_file_path}")
+                new_article_files_generated.append(plan)
+            except Exception as e:
+                print(f"❌ [本番生成] ファイル作成失敗: {e}")
+        else:
+             print(f"❌ [本番生成] HTMLコード生成失敗: {file_name}")
+
+    # --- 8. ハブページの自動更新 ---
+    print(f"\n--- [フェーズ8: ハブページの自動更新] ---")
+
     all_content_plans = integrate_content_data(processed_articles, article_plans)
+
+    hub_path_to_update = priority_file
+    hub_dir = os.path.dirname(hub_path_to_update)
+
+    print(f"🏭 {hub_path_to_update} をスキャンし、配下の全記事リンクを組み込みます。")
+
+    try:
+        parent_page_info = next(p for p in all_content_plans if p['file_name'] == hub_path_to_update)
+    except StopIteration:
+        print(f"❌ [ハブ更新失敗] 計画リストに親ハブ ({hub_path_to_update}) が見つかりません。")
+        sys.exit(1)
+
+    parent_page_info_for_regeneration = {
+        'file_name': parent_page_info['file_name'],
+        'title': parent_page_info['title'],
+        'purpose': parent_page_info.get('summary', parent_page_info.get('generated_purpose')) # ⬅️ [修正] 'summary' 優先
+    }
+
+    all_articles_in_section = []
+    for plan in all_content_plans:
+         if (os.path.dirname(plan['file_name']) == hub_dir) and \
+            (plan['file_name'] != hub_path_to_update):
+            all_articles_in_section.append(plan)
+
+    print(f"  -> {len(all_articles_in_section)} 件の詳細記事（新旧含む）をスキャンしました。")
+
+    new_article_links_html = "<ul>"
+    if not all_articles_in_section:
+        new_article_links_html = "<p>（現在、このセクションの詳細記事はありません）</p>"
+    else:
+        for plan in all_articles_in_section:
+            link_path = os.path.basename(plan['file_name'])
+            article_summary = plan.get('summary', plan.get('generated_purpose', '')) # ⬅️ [修正] 'summary' 優先
+            new_article_links_html += f"<li><a href='{link_path}' class='text-blue-500 hover:underline'>{plan['title']}</a>: {article_summary}</li>"
+        new_article_links_html += "</ul>"
+
+    parent_page_info_for_regeneration['purpose'] = f"""
+    このページ（{parent_page_info_for_regeneration['title']}）は、以下の「{len(all_articles_in_section)}件の全詳細記事」への導線を含むハブページとして機能します。
+    元の目的（{parent_page_info_for_regeneration['purpose']}）を要約しつつ、これらの新しい記事への明確な導線（目次）を提供してください。
+
+    【{hub_dir} セクションの全詳細記事リスト】
+    {new_article_links_html}
+    """
+
+    nav_list_for_generation = [
+        {
+            "file_name": p['file_name'],
+            "title": p['title'],
+            "purpose": p.get('summary', p.get('generated_purpose', '')) # ⬅️ [修正] 'summary' 優先
+        } for p in all_content_plans
+    ]
+
+    final_hub_code = generate_single_page_html(
+        gemini_client,
+        parent_page_info_for_regeneration,
+        CORPORATE_IDENTITY,
+        None,
+        nav_list_for_generation,
+        retry_attempts=3
+    )
+
+    if "❌" not in final_hub_code:
+        hub_file_path = os.path.join(BASE_DIR, parent_page_info_for_regeneration['file_name'])
+        try:
+            with open(hub_file_path, "w", encoding="utf-8") as f:
+                f.write(final_hub_code)
+            print(f"✅ [ハブ更新完了] ファイルを上書き保存しました: {hub_file_path}")
+        except Exception as e:
+            print(f"❌ [ハブ更新失敗] ファイル書き込みエラー: {e}")
+    else:
+        print(f"❌ [ハブ更新失敗] HTMLの再生成に失敗しました。")
+
+    # --- 9. (レポート) 全体計画をMDファイルに保存 ---
+    print("\n--- [最終処理: 全体計画の保存] ---")
+    os.makedirs(REPORTS_DIR, exist_ok=True)
+
     save_to_markdown(all_content_plans, REPORT_FILE)
 
     print(f"✅ 全体計画を {REPORT_FILE} に保存しました。")

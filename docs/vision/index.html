@@ -3,255 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>理念・哲学 | QuantLeap Inc. - データで個人の可能性を最大化する</title>
-    <meta name="description" content="データとAIで個人のQOLを最大化する「生活者最適化」。私たちの核となる哲学、倫理へのコミットメント、そして『意思決定の科学』が拓く未来像（ビジョン2030）への入り口となるページです。">
-    <meta name="keywords" content="理念, 哲学, AI倫理, データ倫理, 生活者最適化, 意思決定の科学, Society 5.0, パーパス, ビジョン">
-    
-    <link rel="canonical" href="https://www.quantleap.inc/vision/index.html">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>QL</text></svg>">
-
+    <title>理念・哲学 | QuantLeap Inc.</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@700;900&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --color-primary: #0F172A; /* Slate 900 */
+            --color-secondary: #1E293B; /* Slate 800 */
+            --color-accent: #38BDF8; /* Sky 400 */
+            --color-text-primary: #F1F5F9; /* Slate 100 */
+            --color-text-secondary: #94A3B8; /* Slate 400 */
+        }
         body {
-            font-family: 'Noto Sans JP', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
-            color: #1e293b; /* slate-800 */
+            background-color: var(--color-primary);
+            color: var(--color-text-primary);
+            font-family: 'Noto Sans JP', 'Roboto', sans-serif;
         }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Roboto', sans-serif;
-        }
-        .text-gradient {
-            background: linear-gradient(to right, #1d4ed8, #1e3a8a);
+        .bg-primary { background-color: var(--color-primary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .text-accent { color: var(--color-accent); }
+        .border-accent { border-color: var(--color-accent); }
+        .gradient-text {
+            background: linear-gradient(to right, #38BDF8, #A78BFA);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .nav-item {
-            position: relative;
-        }
-        .dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            z-index: 1000;
-            min-width: 200px;
-            background-color: white;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border-radius: 0.5rem;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-        .nav-item:hover .dropdown {
-            display: block;
+        .active-nav {
+            color: var(--color-accent);
+            border-bottom: 2px solid var(--color-accent);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-primary">
 
     <!-- Header -->
-    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="../index.html" class="text-2xl font-bold font-roboto text-blue-800">QuantLeap Inc.</a>
-            
-            <!-- Desktop Navigation -->
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="../index.html" class="text-slate-600 hover:text-blue-600 transition-colors">ホーム</a>
-                <div class="nav-item">
-                    <a href="../solutions/index.html" class="text-slate-600 hover:text-blue-600 transition-colors flex items-center">ソリューション
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </a>
-                    <div class="dropdown">
-                        <a href="../solutions/index.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">ソリューション概要</a>
-                        <a href="../solutions/individual.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">個人向けサービス</a>
-                        <a href="../solutions/partner.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">パートナーソリューション</a>
-                        <a href="../solutions/case-studies.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">導入事例</a>
+    <header class="bg-secondary/50 backdrop-blur-lg sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-bold gradient-text">
+                QuantLeap Inc.
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="../index.html" class="text-gray-300 hover:text-accent transition-colors duration-300">ホーム</a>
+                <div class="relative group">
+                    <a href="../solutions/index.html" class="text-gray-300 hover:text-accent transition-colors duration-300">ソリューション</a>
+                    <div class="absolute hidden group-hover:block bg-secondary shadow-lg rounded-md mt-2 w-48">
+                        <a href="../solutions/partner.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary">パートナー様向け</a>
+                        <a href="../solutions/individual.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary">個人のお客様</a>
+                        <a href="../solutions/case-studies.html" class="block px-4 py-2 text-sm text-gray-300 hover:bg-primary">導入事例</a>
                     </div>
                 </div>
-                <div class="nav-item">
-                    <span class="text-blue-800 font-bold border-b-2 border-blue-600 pb-1 cursor-default flex items-center">理念・哲学
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </span>
-                    <div class="dropdown">
-                         <a href="index.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 bg-slate-100 font-bold">理念・哲学 トップ</a>
-                         <a href="philosophy-of-life-optimization-maximizing-qol-17.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">『生活者最適化』の哲学</a>
-                         <a href="commitment-to-ai-ethics-and-transparency-18.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">信頼の礎となるデータ倫理</a>
-                         <a href="unlocking-human-potential-decision-science-in-society5-19.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">ビジョン2030</a>
-                    </div>
-                </div>
-                <a href="../insights/index.html" class="text-slate-600 hover:text-blue-600 transition-colors">知見・洞察</a>
-                <a href="../collaboration/index.html" class="text-slate-600 hover:text-blue-600 transition-colors">協業・採用</a>
-                <a href="../contact/index.html" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition-colors font-bold">お問い合わせ</a>
-            </div>
-            
-            <!-- Mobile Menu Button -->
+                <a href="../insights/index.html" class="text-gray-300 hover:text-accent transition-colors duration-300">知見・洞察</a>
+                <a href="index.html" class="active-nav pb-1">理念・哲学</a>
+                <a href="../collaboration/index.html" class="text-gray-300 hover:text-accent transition-colors duration-300">協業・採用</a>
+                <a href="../contact/index.html" class="bg-accent hover:bg-sky-500 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300">お問い合わせ</a>
+            </nav>
             <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-slate-800 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <button id="mobile-menu-button" class="text-gray-300 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-4 6h10"></path></svg>
                 </button>
             </div>
-        </nav>
-
+        </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="../index.html" class="block py-2 text-slate-600 hover:text-blue-600">ホーム</a>
-            <a href="../solutions/index.html" class="block py-2 text-slate-600 hover:text-blue-600">ソリューション</a>
-            <a href="index.html" class="block py-2 text-blue-800 font-bold">理念・哲学</a>
-            <a href="../insights/index.html" class="block py-2 text-slate-600 hover:text-blue-600">知見・洞察</a>
-            <a href="../collaboration/index.html" class="block py-2 text-slate-600 hover:text-blue-600">協業・採用</a>
-            <a href="../contact/index.html" class="block mt-2 bg-blue-600 text-white px-4 py-2 rounded-full text-center">お問い合わせ</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-secondary">
+            <a href="../index.html" class="block py-2 px-6 text-sm text-gray-300 hover:bg-primary">ホーム</a>
+            <a href="../solutions/index.html" class="block py-2 px-6 text-sm text-gray-300 hover:bg-primary">ソリューション</a>
+            <a href="../insights/index.html" class="block py-2 px-6 text-sm text-gray-300 hover:bg-primary">知見・洞察</a>
+            <a href="index.html" class="block py-2 px-6 text-sm text-accent bg-primary">理念・哲学</a>
+            <a href="../collaboration/index.html" class="block py-2 px-6 text-sm text-gray-300 hover:bg-primary">協業・採用</a>
+            <a href="../contact/index.html" class="block py-2 px-6 text-sm text-gray-300 hover:bg-primary">お問い合わせ</a>
         </div>
     </header>
 
+    <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="bg-white">
-            <div class="container mx-auto px-6 py-16 md:py-24 text-center">
-                <h1 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight">理念・哲学</h1>
-                <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
-                    データを通じて個人の可能性を最大化し、より豊かな社会へ。
-                    私たちのパーパス、倫理、そして未来へのビジョンを探るための羅針盤がここにあります。
+        <section class="py-24 md:py-32 bg-secondary">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    <span class="gradient-text">理念・哲学</span>
+                </h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-text-secondary">
+                    データとAIで、すべての人間の可能性を最大化する。私たちは、技術が個人の幸福に奉仕する未来を構想し、その実現に向けて倫理的かつ透明性の高いアプローチを追求します。
                 </p>
             </div>
         </section>
 
-        <!-- Hub Content Section -->
+        <!-- Philosophy Summary Section -->
         <section class="py-16 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12 md:mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">私たちの思想の核心</h2>
-                    <p class="mt-4 text-slate-600 max-w-2xl mx-auto">
-                        私たちの事業は、明確な哲学、揺るぎない倫理、そして壮大なビジョンに基づいています。これらは、私たちの<a href="../solutions/index.html" class="text-blue-600 hover:underline">ソリューション</a>開発から社会との関わり方まで、あらゆる活動の根幹をなすものです。
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">私たちのパーパス：『生活者最適化』の実現へ</h2>
+                    <p class="text-text-secondary">
+                        私たちの存在意義は、データを通じて個人のQuality of Life (QOL)を最大化することです。Web上の膨大なライフログを人間中心のAIで解析し、消費、健康、学習、キャリアといった人生の重要な局面で、一人ひとりが最良の意思決定を行えるよう支援します。これを、私たちは『生活者最適化』と呼んでいます。
                     </p>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Card 1: Philosophy -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
-                        <div class="p-8 flex-grow">
-                            <div class="flex items-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-12v4m-2-2h4m5 4v4m-2-2h4M17 3l4 4M3 17l4 4M17 17l4-4M3 7l4-4" />
-                                </svg>
-                                <h3 class="ml-4 text-2xl font-bold text-slate-900">我々のパーパス</h3>
-                            </div>
-                            <h4 class="text-xl font-bold text-blue-800 mb-2">『生活者最適化』の哲学</h4>
-                            <p class="text-slate-600 mb-6">
-                                私たちの核となる哲学『生活者最適化』とは何か。ライフログをAIで解析し、個々のQOLを最大化するデータ駆動型アプローチの全体像と、それが<a href="vision-society-5-data-science-qol-6.html" class="text-blue-600 hover:underline">Society 5.0</a>時代にもたらす価値について解説します。
-                            </p>
-                        </div>
-                        <div class="p-6 bg-slate-50">
-                            <a href="philosophy-of-life-optimization-maximizing-qol-17.html" class="inline-flex items-center font-bold text-blue-600 hover:text-blue-800 transition-colors">
-                                哲学を深く知る
-                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </a>
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-secondary p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-accent mb-2">人間中心のAI</h3>
+                        <p class="text-sm text-text-secondary">技術は目的ではなく、あくまで手段です。個人の価値観と主体性を尊重し、AIが人間の能力を拡張するパートナーとなる設計を徹底します。</p>
                     </div>
-
-                    <!-- Card 2: Ethics -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
-                        <div class="p-8 flex-grow">
-                            <div class="flex items-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                </svg>
-                                <h3 class="ml-4 text-2xl font-bold text-slate-900">倫理への誓約</h3>
-                            </div>
-                            <h4 class="text-xl font-bold text-blue-800 mb-2">信頼の礎となるデータ倫理</h4>
-                            <p class="text-slate-600 mb-6">
-                                データとAIを活用する上で最も重要な『倫理と透明性』へのコミットメントを表明します。機微な情報を扱う責任を自覚し、アルゴリズムの公平性を確保するための具体的な原則と実践をお伝えします。詳細は<a href="../legal/privacy-policy.html" class="text-blue-600 hover:underline">プライバシーポリシー</a>にも反映されています。
-                            </p>
-                        </div>
-                         <div class="p-6 bg-slate-50">
-                            <a href="commitment-to-ai-ethics-and-transparency-18.html" class="inline-flex items-center font-bold text-blue-600 hover:text-blue-800 transition-colors">
-                                透明性への取り組みを見る
-                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </a>
-                        </div>
+                    <div class="bg-secondary p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-accent mb-2">徹底した透明性と倫理</h3>
+                        <p class="text-sm text-text-secondary">アルゴリズムの公平性、説明可能性（XAI）、そしてプライバシー・バイ・デザインを核とし、信頼の基盤となるデータガバナンスを構築します。</p>
                     </div>
-
-                    <!-- Card 3: Vision -->
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
-                        <div class="p-8 flex-grow">
-                             <div class="flex items-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-                                </svg>
-                                <h3 class="ml-4 text-2xl font-bold text-slate-900">未来への展望</h3>
-                            </div>
-                            <h4 class="text-xl font-bold text-blue-800 mb-2">ビジョン2030</h4>
-                            <p class="text-slate-600 mb-6">
-                                私たちが目指す未来像を具体的に描きます。『意思決定の科学』が個人の学習やキャリアを最適化し、潜在能力を解放する未来。Society 5.0における自己実現を、私たちのテクノロジーがいかに支援するのかを展望します。このビジョンに共感いただける方は、ぜひ<a href="../contact/index.html" class="text-blue-600 hover:underline">お問い合わせ</a>ください。
-                            </p>
-                        </div>
-                         <div class="p-6 bg-slate-50">
-                            <a href="unlocking-human-potential-decision-science-in-society5-19.html" class="inline-flex items-center font-bold text-blue-600 hover:text-blue-800 transition-colors">
-                                未来像を探求する
-                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                            </a>
-                        </div>
+                    <div class="bg-secondary p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-accent mb-2">Society 5.0への貢献</h3>
+                        <p class="text-sm text-text-secondary">個人のQOL最大化が、より豊かで調和のとれた社会の礎となると信じ、データサイエンスが拓く新しい社会の実現を目指します。</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Article Hub Section -->
+        <section class="py-16 md:py-24 bg-secondary">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">理念を構成する技術と哲学</h2>
+                    <p class="text-text-secondary max-w-3xl mx-auto">
+                        私たちのビジョンは、具体的な技術、厳格な倫理規定、そして未来への深い洞察によって支えられています。以下の記事群を通じて、私たちの思想の核心に触れてください。
+                    </p>
+                </div>
+
+                <!-- Category: Purpose & Vision -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold border-l-4 border-accent pl-4 mb-8">パーパスとビジョン</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">データが拓く『生活者最適化』の未来：私たちのパーパスとビジョンについて</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">なぜ私たちは存在するのか。それは「データを通じて個人の可能性を最大化する」ためです。本稿では、私たちの存在意義（パーパス）を深掘りし、Web行動ログとAIがいかにして個人のQOLを高める『生活者最適化』を実現するのか、私たちが目指す豊かな社会のビジョンを具体的に描きます。</p>
+                            <a href="purpose-and-vision-for-consumer-life-optimization-21.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">『生活者最適化』の哲学：データが個人のQOLを最大化する我々のパーパス</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">『生活者最適化』は単なる技術的目標ではありません。本稿では、この概念の根底にある哲学的思想と、データが個人の幸福と自己実現にどう貢献するのか、私たちの核心的価値観を詳述します。</p>
+                            <a href="philosophy-of-life-optimization-maximizing-qol-17.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">データで最大化するQOL：個人の幸福から、より豊かで調和のとれた社会へ</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">個人の幸福の総和が社会全体の豊かさに繋がるという信念のもと、データ活用がもたらす社会的インパクトと、持続可能で調和のとれた未来像について論じます。</p>
+                            <a href="maximizing-qol-with-data-for-a-harmonious-society-15.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category: AI Ethics & Governance -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold border-l-4 border-accent pl-4 mb-8">AI倫理とガバナンス</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">信頼の基盤となるデータ倫理：AIが個人の尊厳を守るための5つのコア原則</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">私たちのパーパスの核は、データとAIの活用において個人の尊厳を最優先することです。本記事では、透明性、公平性、説明責任、プライバシー保護、セキュリティを担保するために私たちが定めた5つの倫理原則と、それを実現する技術的・組織的アプローチについて詳述します。</p>
+                            <a href="our-core-principles-of-data-ethics-and-ai-governance-20.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                             <h4 class="font-bold text-lg mb-2">人間中心AIの倫理原則：データが個人の幸福に奉仕するための技術的・哲学的基盤</h4>
+                             <p class="text-sm text-text-secondary flex-grow mb-4">AIが真に人間のためのツールであり続けるために。私たちが掲げる人間中心の設計思想と、それを支える倫理原則、そして技術実装における具体的な配慮について解説します。</p>
+                             <a href="philosophy-human-centric-ai-ethics-5.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">AIバイアスとの闘い：『生活者最適化』の公平性を守る技術的アプローチと実践</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">データに内在するバイアスをいかに検出し、軽減するか。公平なアルゴリズムを構築するための最新の技術的アプローチと、私たちが実践する継続的なモニタリング体制を詳説します。</p>
+                            <a href="ai-bias-mitigation-for-fair-qol-maximization-11.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">理念から実践へ：『生活者最適化』を支えるAI倫理ガバナンス・フレームワークの全貌</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">理念を組織のDNAに刻み込むために。倫理原則を日々の開発・運用プロセスに統合する、私たちのAI倫理ガバナンス・フレームワークの全体像と具体的な実践例を紹介します。</p>
+                            <a href="ai-ethics-governance-framework-in-practice-13.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">データガバナンスが築く信頼：ライフログ解析におけるプライバシー・バイ・デザインの技術的実装</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">プライバシー保護は技術設計の根幹です。匿名化、差分プライバシーなどの技術をいかに活用し、企画段階からプライバシーを組み込む「プライバシー・バイ・デザイン」の実践を解説します。</p>
+                            <a href="data-governance-framework-privacy-by-design-in-lifelog-ai-9.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                         <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">私たちのAI倫理原則：アルゴリズムの透明性と説明責任が築く信頼の基盤</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">透明性と説明責任は、信頼関係を築くための両輪です。私たちが定めるAI倫理原則と、それを遵守するための組織体制やプロセスについて具体的に説明します。</p>
+                            <a href="our-ai-ethics-principles-transparency-accountability-14.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category: Technology & Methodology -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold border-l-4 border-accent pl-4 mb-8">技術と方法論</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">技術と人間性の共鳴：ライフログ解析AIが個人の意思決定に寄り添う方法論</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">私たちの使命は、AIによるライフログ解析を通じて、消費からキャリアに至るまで最適な意思決定を支援することです。この記事では、私たちの技術が単なるデータ処理ではなく、いかに人間中心の設計思想に基づき、一人ひとりの価値観に寄り添うのか、その具体的な方法論と哲学を解説します。</p>
+                            <a href="human-centric-ai-methodology-for-decision-making-support-22.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">意思決定の科学と人間の主体性：AIはいかにして『最良の選択』を支援するのか</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">AIは答えを押し付けるのではなく、人間の判断材料を豊かにする存在であるべきです。行動経済学とデータサイエンスを融合させ、人間の主体性を損なうことなく最適な選択を支援する技術的アプローチを探求します。</p>
+                            <a href="science-of-decision-making-empowering-human-agency-16.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">ブラックボックスから信頼のガラス箱へ：説明可能AI（XAI）が拓く『生活者最適化』の未来</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">「なぜこの選択肢が推奨されたのか？」その問いに答えることが信頼の第一歩です。SHAPやLIMEなどのXAI技術を活用し、AIの判断根拠を可視化する私たちの取り組みを紹介します。</p>
+                            <a href="explainable-ai-xai-for-algorithmic-transparency-12.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                         <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">パーパス・ドリブンなAI開発：行動ログ解析が消費からキャリアまでの最適解を導くプロセスとその透明性</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">私たちのAI開発は常に「個人の可能性最大化」というパーパスに基づいています。行動ログから有益なインサイトを抽出し、それを個人の目標達成に繋げるまでの技術プロセスを透明性をもって解説します。</p>
+                            <a href="purpose-driven-ai-behavioral-log-analysis-7.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category: Societal Impact & Future -->
+                <div>
+                    <h3 class="text-2xl font-bold border-l-4 border-accent pl-4 mb-8">社会的インパクトと未来像</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                       <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">Society 5.0の実現へ：データサイエンスが拓くQOL最大化と自律的意思決定の未来</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">サイバー空間とフィジカル空間が高度に融合するSociety 5.0。その中でデータサイエンスが個人のQOL向上と自律的な意思決定をどう支援し、社会全体の最適化に貢献するのかを展望します。</p>
+                            <a href="vision-society-5-data-science-qol-6.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">Society 5.0へのロードマップ：パーパス・ドリブンAIが拓く『意思決定の科学』とその未来像</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">ビジョンを現実にするための具体的なステップとは。パーパス・ドリブンAIを社会実装し、『意思決定の科学』を普及させるための技術的・社会的ロードマップを提示します。</p>
+                            <a href="roadmap-to-society5-0-purpose-driven-ai-for-decision-science-10.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                        <div class="bg-primary rounded-lg p-6 flex flex-col hover:shadow-2xl hover:shadow-accent/20 transition-shadow duration-300">
+                            <h4 class="font-bold text-lg mb-2">ビジョン2030：『意思決定の科学』が切り拓く、個人の学習とキャリアの未来像</h4>
+                            <p class="text-sm text-text-secondary flex-grow mb-4">2030年、AIは個人の学びと働き方をどう変革するか。生涯学習やキャリアパスの最適化を支援する『意思決定の科学』がもたらす、より創造的で豊かな個人の未来を描きます。</p>
+                            <a href="unlocking-human-potential-decision-science-in-society5-19.html" class="text-accent font-bold self-start hover:underline">記事を読む &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-800 text-slate-50">
+    <footer class="bg-secondary border-t border-slate-700">
         <div class="container mx-auto px-6 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Column 1: Company Info -->
                 <div>
-                    <h3 class="text-xl font-bold font-roboto mb-4">QuantLeap Inc.</h3>
-                    <p class="text-slate-400">データを通じて個人のQOLと可能性を最大化し、より豊かな社会の実現に貢献します。</p>
+                    <h3 class="text-xl font-bold gradient-text mb-4">QuantLeap Inc.</h3>
+                    <p class="text-text-secondary text-sm mb-4">データとAIの力で個人の可能性とQOLを最大化し、より豊かな社会を実現します。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-text-secondary hover:text-accent transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                        <a href="#" class="text-text-secondary hover:text-accent transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+                        <a href="#" class="text-text-secondary hover:text-accent transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12.011c0 4.432 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.011C22 6.477 17.523 2 12 2z" clip-rule="evenodd" /></svg></a>
+                    </div>
                 </div>
-                <!-- Column 2: Solutions -->
+
+                <!-- Column 2: Navigation -->
                 <div>
-                    <h3 class="text-lg font-bold mb-4">ソリューション</h3>
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">ナビゲーション</h3>
                     <ul class="space-y-2">
-                        <li><a href="../solutions/index.html" class="text-slate-300 hover:text-amber-500 transition-colors">ソリューション概要</a></li>
-                        <li><a href="../solutions/individual.html" class="text-slate-300 hover:text-amber-500 transition-colors">個人向けサービス</a></li>
-                        <li><a href="../solutions/partner.html" class="text-slate-300 hover:text-amber-500 transition-colors">パートナーソリューション</a></li>
-                        <li><a href="../solutions/case-studies.html" class="text-slate-300 hover:text-amber-500 transition-colors">導入事例</a></li>
+                        <li><a href="../index.html" class="text-sm text-text-secondary hover:text-accent transition-colors">ホーム</a></li>
+                        <li><a href="../solutions/index.html" class="text-sm text-text-secondary hover:text-accent transition-colors">ソリューション</a></li>
+                        <li><a href="../insights/index.html" class="text-sm text-text-secondary hover:text-accent transition-colors">知見・洞察</a></li>
+                        <li><a href="index.html" class="text-sm text-accent">理念・哲学</a></li>
                     </ul>
                 </div>
-                <!-- Column 3: Vision & Insights -->
+
+                <!-- Column 3: Resources -->
                 <div>
-                    <h3 class="text-lg font-bold mb-4">理念と知見</h3>
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">リソース</h3>
                     <ul class="space-y-2">
-                        <li><a href="index.html" class="text-amber-500 font-bold">理念・哲学</a></li>
-                        <li><a href="../insights/index.html" class="text-slate-300 hover:text-amber-500 transition-colors">知見・洞察</a></li>
-                        <li><a href="our-ai-ethics-principles-transparency-accountability-14.html" class="text-slate-300 hover:text-amber-500 transition-colors">私たちのAI倫理原則</a></li>
-                        <li><a href="explainable-ai-xai-for-algorithmic-transparency-12.html" class="text-slate-300 hover:text-amber-500 transition-colors">説明可能AI(XAI)</a></li>
+                        <li><a href="../solutions/case-studies.html" class="text-sm text-text-secondary hover:text-accent transition-colors">導入事例</a></li>
+                        <li><a href="../collaboration/index.html" class="text-sm text-text-secondary hover:text-accent transition-colors">協業・採用</a></li>
+                        <li><a href="../solutions/partner.html" class="text-sm text-text-secondary hover:text-accent transition-colors">パートナー様へ</a></li>
+                         <li><a href="../solutions/individual.html" class="text-sm text-text-secondary hover:text-accent transition-colors">個人のお客様へ</a></li>
                     </ul>
                 </div>
-                <!-- Column 4: Company & Support -->
+
+                <!-- Column 4: Legal & Contact -->
                 <div>
-                    <h3 class="text-lg font-bold mb-4">企業情報</h3>
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">情報</h3>
                     <ul class="space-y-2">
-                        <li><a href="../collaboration/index.html" class="text-slate-300 hover:text-amber-500 transition-colors">協業・採用</a></li>
-                        <li><a href="../contact/index.html" class="text-slate-300 hover:text-amber-500 transition-colors">お問い合わせ</a></li>
-                        <li><a href="../legal/privacy-policy.html" class="text-slate-300 hover:text-amber-500 transition-colors">プライバシーポリシー</a></li>
+                        <li><a href="../contact/index.html" class="text-sm text-text-secondary hover:text-accent transition-colors">お問い合わせ</a></li>
+                        <li><a href="../legal/privacy-policy.html" class="text-sm text-text-secondary hover:text-accent transition-colors">プライバシーポリシー</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="mt-12 border-t border-slate-700 pt-6 text-center text-slate-400 text-sm">
+
+            <div class="mt-12 pt-8 border-t border-slate-700 text-center text-sm text-text-secondary">
                 <p>&copy; 2024 QuantLeap Inc. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
+
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
     </script>
-
 </body>
 </html>
