@@ -1,342 +1,296 @@
 <!DOCTYPE html>
-<html lang="ja" class="dark">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>協業・採用 - データとAIで個人の可能性を最大化する</title>
+    <meta name="description" content="私たちのビジョン「生活者最適化」を共に実現するパートナーと才能を募集しています。データ倫理、技術戦略、AIモデル開発の最前線に関する詳細をご覧ください。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --foreground-rgb: 255, 255, 255;
-            --background-start-rgb: 0, 0, 0;
-            --background-end-rgb: 15, 23, 42;
-            --primary-rgb: 59, 130, 246;
-            --secondary-rgb: 147, 197, 253;
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8fafc; /* cool-gray-50 */
+            --primary-text: #111827; /* gray-900 */
+            --secondary-text: #4b5563; /* gray-600 */
+            --accent-color: #2563eb; /* blue-600 */
+            --accent-hover: #1d4ed8; /* blue-700 */
+            --border-color: #e5e7eb; /* gray-200 */
+            --header-bg: rgba(255, 255, 255, 0.8);
+            --footer-bg: #1f2937; /* gray-800 */
+            --footer-text: #d1d5db; /* gray-300 */
         }
-
         body {
-            font-family: 'Inter', 'Noto Sans JP', sans-serif;
-            color: rgb(var(--foreground-rgb));
-            background: linear-gradient(
-                to bottom,
-                transparent,
-                rgb(var(--background-end-rgb))
-            )
-            rgb(var(--background-start-rgb));
-            overscroll-behavior-y: none;
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--primary-text);
+            background-color: var(--primary-bg);
         }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
         }
-
-        .glow-effect {
+        .font-jp { font-family: 'Noto Sans JP', sans-serif; }
+        .font-en { font-family: 'Inter', sans-serif; }
+        .glassmorphism-header {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: var(--header-bg);
+        }
+        .nav-link {
             position: relative;
+            text-decoration: none;
+            color: var(--secondary-text);
+            transition: color 0.3s ease;
         }
-        
-        .glow-effect::before {
+        .nav-link:hover {
+            color: var(--primary-text);
+        }
+        .nav-link::after {
             content: '';
             position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 300px;
-            height: 300px;
-            background: rgba(var(--primary-rgb), 0.15);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            filter: blur(100px);
-            z-index: -1;
-            pointer-events: none;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent-color);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
         }
-
-        .section-title {
-            @apply text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-500 mb-4;
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
         }
-        
-        .section-subtitle {
-            @apply text-lg text-slate-300 max-w-3xl mx-auto;
+        .nav-link-active {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
         }
     </style>
 </head>
 <body class="antialiased">
 
     <!-- Header -->
-    <header class="sticky top-0 z-50 glass-effect">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex-shrink-0">
-                    <a href="../index.html" class="text-xl font-bold text-white">
-                        QuantumLeap Inc.
-                    </a>
-                </div>
-                <div class="hidden md:block">
-                    <nav class="flex items-center space-x-4">
-                        <a href="../vision/index.html" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">理念・哲学</a>
-                        <a href="../solutions/index.html" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">ソリューション</a>
-                        <a href="../insights/index.html" class="text-slate-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">知見・洞察</a>
-                        <a href="../collaboration/index.html" class="text-blue-400 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">協業・採用</a>
-                        <a href="../contact/index.html" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-blue-500">
-                            お問い合わせ
+    <header id="header" class="sticky top-0 z-50 w-full glassmorphism-header border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="../index.html" class="text-2xl font-bold font-en text-gray-800">DataOptimize Inc.</a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="../vision/index.html" class="nav-link font-medium">理念・哲学</a>
+                    <div class="relative group">
+                        <a href="../solutions/index.html" class="nav-link font-medium flex items-center">
+                            ソリューション
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </a>
-                    </nav>
+                        <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md mt-2 py-2 w-48 border border-gray-100">
+                            <a href="../solutions/individual.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">個人向けサービス</a>
+                            <a href="../solutions/partner.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">パートナーソリューション</a>
+                            <a href="../solutions/case-studies.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">導入事例</a>
+                        </div>
+                    </div>
+                    <a href="../insights/index.html" class="nav-link font-medium">知見・洞察</a>
+                    <a href="index.html" class="nav-link nav-link-active font-medium">協業・採用</a>
+                </nav>
+
+                <div class="hidden lg:flex items-center space-x-4">
+                    <a href="../contact/index.html" class="btn-primary font-bold py-2 px-6 rounded-full text-sm">お問い合わせ</a>
                 </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="h-6 w-6" id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
-                        <svg class="hidden h-6 w-6" id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
-        <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="md:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="../vision/index.html" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">理念・哲学</a>
-                <a href="../solutions/index.html" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">ソリューション</a>
-                <a href="../insights/index.html" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">知見・洞察</a>
-                <a href="../collaboration/index.html" class="text-blue-400 bg-slate-800 block px-3 py-2 rounded-md text-base font-medium" aria-current="page">協業・採用</a>
-                <a href="../contact/index.html" class="text-slate-300 hover:bg-slate-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">お問い合わせ</a>
-            </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden px-6 pb-4">
+            <nav class="flex flex-col space-y-4">
+                <a href="../vision/index.html" class="nav-link font-medium">理念・哲学</a>
+                <a href="../solutions/index.html" class="nav-link font-medium">ソリューション</a>
+                <a href="../insights/index.html" class="nav-link font-medium">知見・洞察</a>
+                <a href="index.html" class="nav-link nav-link-active font-medium">協業・採用</a>
+                <a href="../contact/index.html" class="btn-primary text-center font-bold py-2 px-6 rounded-full text-sm mt-4">お問い合わせ</a>
+            </nav>
         </div>
     </header>
 
+
+    <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="py-24 md:py-32 text-center relative overflow-hidden glow-effect">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
-                    未来を共創する。<br class="md:hidden"> パートナーと才能を求めて。
+        <section class="bg-secondary-bg">
+            <div class="container mx-auto px-6 py-24 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight">
+                    データとAIで、<br class="md:hidden">個の可能性を共創する
                 </h1>
-                <p class="max-w-3xl mx-auto text-lg md:text-xl text-slate-300 mb-10">
-                    Society 5.0の実現に向け、データとAIの力で社会課題に挑む。私たちのビジョンに共鳴し、新たな価値を創造する仲間を募集しています。
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-secondary-text font-jp">
+                    私たちのパーパス「データを通じて個人の可能性を最大化し、より豊かな社会を実現する」に共感し、
+                    「生活者最適化」の未来を共に築くパートナー、そして情熱ある才能を求めています。
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <a href="#partnership" class="w-full sm:w-auto inline-block px-8 py-3 text-base font-semibold text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 transition-transform duration-300 hover:scale-105">
-                        パートナーシップについて
-                    </a>
-                    <a href="#careers" class="w-full sm:w-auto inline-block px-8 py-3 text-base font-semibold text-white bg-transparent border-2 border-slate-500 rounded-lg hover:bg-slate-800 hover:border-slate-400 transition-all duration-300">
-                        採用情報を見る
-                    </a>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">私たちの挑戦の核心</h2>
+                    <p class="mt-4 text-lg text-secondary-text font-jp">
+                        私たちのミッションは、Web行動ログをAIで解析し、個人のQOLを最大化する選択肢を提示することです。
+                        この壮大な挑戦は、単一の組織では成し遂げられません。倫理、技術、ビジネス、そして何よりも「人間」への深い洞察を融合させるため、多様な視点と専門性を持つ皆様との協業が不可欠です。
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- Why Collaborate With Us Section -->
-        <section class="py-20 md:py-28 bg-slate-900/50">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="section-title">データサイエンスで切り拓く、共創の未来</h2>
-                <p class="section-subtitle mb-12">
-                    私たちは、個人の可能性とQOLの最大化というパーパスを掲げています。この壮大な目標は、一社単独では達成できません。多様なドメイン知識、革新的な技術、そして社会変革への強い意志を持つパートナーとの協業こそが、未来を創造する原動力になると信じています。
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="glass-effect rounded-xl p-6 text-left">
-                        <h3 class="text-xl font-bold text-white mb-3">人間中心のAI</h3>
-                        <p class="text-slate-300">
-                            私たちの技術は、常に「人」を中心に設計されます。個人の尊厳と自己決定権を尊重し、テクノロジーが人々の幸福に貢献するための倫理的基盤を最優先します。
-                        </p>
-                    </div>
-                    <div class="glass-effect rounded-xl p-6 text-left">
-                        <h3 class="text-xl font-bold text-white mb-3">最先端の技術力</h3>
-                        <p class="text-slate-300">
-                            ライフログ解析、因果推論、強化学習といった先端AI技術を駆使し、複雑な課題に対して高精度な予測と最適な意思決定支援を提供します。
-                        </p>
-                    </div>
-                    <div class="glass-effect rounded-xl p-6 text-left">
-                        <h3 class="text-xl font-bold text-white mb-3">透明性と信頼性</h3>
-                        <p class="text-slate-300">
-                            データ利用の透明性を確保し、アルゴリズムの公平性・説明可能性を追求します。パートナーやユーザーとの信頼関係こそが、持続的な価値創造の基盤です。
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Partnership Opportunities Section -->
-        <section id="partnership" class="py-20 md:py-28">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="section-title">パートナーシップの可能性</h2>
-                <p class="section-subtitle mb-16">
-                    貴社の持つ強みと私たちのデータサイエンス技術を掛け合わせ、新たなイノベーションを生み出しましょう。私たちは様々な形のパートナーシップを歓迎します。
-                </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Joint Research -->
-                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 flex flex-col items-start text-left hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300">
-                        <div class="bg-blue-900/50 p-3 rounded-lg mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-9.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                               <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-9.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">共同研究</h3>
-                        <p class="text-slate-400 flex-grow">
-                            学術機関や研究機関と共に、Society 5.0が直面する未解決課題（個別化医療、生涯学習パスの最適化、スマートシティにおけるQOL向上など）に挑みます。因果推論、強化学習、連合学習などの先端技術を用いた社会実装を目指す研究を推進します。
-                        </p>
-                    </div>
-                    <!-- Business Alliance -->
-                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 flex flex-col items-start text-left hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300">
-                        <div class="bg-blue-900/50 p-3 rounded-lg mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">事業提携</h3>
-                        <p class="text-slate-400 flex-grow">
-                            各業界のドメイン知識と私たちのAI技術を融合させ、既存事業のDX推進や新たなパーソナライズサービスの共同開発を目指します。データ利活用による顧客体験の向上、業務効率化、新規収益源の創出を実現します。
-                        </p>
-                    </div>
-                    <!-- Technology Partnership -->
-                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 flex flex-col items-start text-left hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300">
-                        <div class="bg-blue-900/50 p-3 rounded-lg mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">技術・データ連携</h3>
-                        <p class="text-slate-400 flex-grow">
-                            高品質なデータアセット、革新的なアルゴリズム、高性能なインフラ技術をお持ちの企業と連携します。相互の技術を連携させることで、より強固なデータエコシステムを構築し、社会全体に大きなインパクトを与えるソリューションの創出を目指します。
-                        </p>
-                    </div>
-                </div>
-                <div class="mt-16">
-                    <a href="../contact/index.html" class="inline-block px-10 py-4 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 transition-transform duration-300 hover:scale-105">
-                        協業について問い合わせる
-                    </a>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Career Opportunities Section -->
-        <section id="careers" class="py-20 md:py-28 bg-slate-900/50">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <h2 class="section-title">未来を創るプロフェッショナルへ</h2>
-                    <p class="section-subtitle mb-12">
-                        私たちのミッションに共感し、データとAIの力で社会をより良くしたいという情熱を持つ人材を求めています。最先端の課題に挑戦し、共に成長できる環境がここにあります。
+        <!-- Article Hub Section -->
+        <section class="bg-secondary-bg py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">技術、戦略、そして人を知る</h2>
+                    <p class="mt-4 text-lg text-secondary-text max-w-3xl mx-auto font-jp">
+                        私たちが「生活者最適化」をどのように実現しようとしているのか。その思想の根幹をなす技術的アプローチ、事業戦略、そして開発の現場で働くデータサイエンティストのリアルな声を通して、私たちの挑戦の深部をご覧ください。
                     </p>
                 </div>
 
-                <div class="max-w-4xl mx-auto">
-                    <!-- Job Opening: Data Scientist -->
-                    <div class="mb-6 bg-slate-800/50 border border-slate-700 rounded-lg p-6 transition-shadow duration-300 hover:shadow-lg">
-                        <h3 class="text-2xl font-bold text-white">データサイエンティスト</h3>
-                        <p class="text-blue-300 mt-1 mb-3">Data Scientist</p>
-                        <p class="text-slate-300 mb-4">Web上の多様なライフログデータから価値ある洞察を引き出し、統計モデリングや機械学習モデル開発を通じて、個人の意思決定を支援するアルゴリズムを構築します。</p>
-                        <p class="text-slate-400"><strong class="text-slate-200">主な責務:</strong> 課題設定、データ分析、予測モデル開発、因果推論による効果検証、ABテスト設計・分析</p>
-                        <p class="text-slate-400 mt-2"><strong class="text-slate-200">必須スキル:</strong> Python (Pandas, scikit-learn, etc.), SQL, 統計学・機械学習の深い知識</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    
+                    <!-- Card 1: Ethics & Technology -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                        <div class="p-8 flex-grow">
+                            <div class="mb-4">
+                                <span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1 rounded-full font-en">Ethics & Technology</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 leading-snug">
+                                <a href="privacy-preserving-xai-for-web-behavior-analysis-29.html" class="hover:text-accent-color transition-colors duration-300">
+                                    データ倫理と技術の両立：Web行動ログ解析におけるプライバシー保護と説明可能AI（XAI）への挑戦
+                                </a>
+                            </h3>
+                            <p class="mt-4 text-secondary-text text-base font-jp flex-grow">
+                                「個人の可能性を最大化する」という理念は、堅牢なデータ倫理基盤の上に成り立ちます。本記事では、差分プライバシーや連合学習などのプライバシー保護技術と、AIの意思決定プロセスを透明化するXAIへの具体的な取り組みを、技術的側面から詳細に解説します。
+                            </p>
+                        </div>
+                        <div class="p-8 pt-0">
+                             <a href="privacy-preserving-xai-for-web-behavior-analysis-29.html" class="font-semibold text-accent-color hover:text-accent-hover transition-colors duration-300 inline-flex items-center">
+                                記事を読む
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
                     </div>
 
-                    <!-- Job Opening: AI/ML Engineer -->
-                    <div class="mb-6 bg-slate-800/50 border border-slate-700 rounded-lg p-6 transition-shadow duration-300 hover:shadow-lg">
-                        <h3 class="text-2xl font-bold text-white">AI/MLエンジニア</h3>
-                        <p class="text-blue-300 mt-1 mb-3">AI/ML Engineer</p>
-                        <p class="text-slate-300 mb-4">深層学習を含む最新のAIモデルを研究開発し、大規模データ処理基盤上で安定的に運用可能なシステムとして実装します。MLOpsの観点からモデルのライフサイクル全体を管理します。</p>
-                        <p class="text-slate-400"><strong class="text-slate-200">主な責務:</strong> AIモデルの研究開発、MLパイプラインの構築・運用、パフォーマンス最適化、新規技術の調査・導入</p>
-                        <p class="text-slate-400 mt-2"><strong class="text-slate-200">必須スキル:</strong> Python (PyTorch/TensorFlow), MLOpsプラクティス, クラウド環境 (AWS/GCP/Azure) でのモデル開発・運用経験</p>
+                    <!-- Card 2: CTO Strategy -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                        <div class="p-8 flex-grow">
+                            <div class="mb-4">
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full font-en">Technology Strategy</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 leading-snug">
+                                <a href="cto-talks-consumer-optimization-ai-technology-strategy-30.html" class="hover:text-accent-color transition-colors duration-300">
+                                    CTOが語る「生活者最適化」の技術戦略：データとAIで切り拓く、個のエンパワーメントと事業の未来
+                                </a>
+                            </h3>
+                            <p class="mt-4 text-secondary-text text-base font-jp flex-grow">
+                                私たちのビジョン「生活者最適化」は、単なる理念ではありません。Webライフログから価値を生み出すためのAI基盤、スケーラブルなデータアーキテクチャ、そして協業パートナーとのエコシステム構築。CTOが自ら、技術戦略の全貌と未来の展望を語ります。
+                            </p>
+                        </div>
+                        <div class="p-8 pt-0">
+                             <a href="cto-talks-consumer-optimization-ai-technology-strategy-30.html" class="font-semibold text-accent-color hover:text-accent-hover transition-colors duration-300 inline-flex items-center">
+                                記事を読む
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3: For Candidates -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                        <div class="p-8 flex-grow">
+                            <div class="mb-4">
+                                <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full font-en">Careers</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 leading-snug">
+                                <a href="data-scientist-career-building-ai-models-for-decision-making-31.html" class="hover:text-accent-color transition-colors duration-300">
+                                    採用候補者へ：データサイエンティストが語る「人の意思決定」に寄り添うAIモデル開発のリアル
+                                </a>
+                            </h3>
+                            <p class="mt-4 text-secondary-text text-base font-jp flex-grow">
+                                私たちのチームが向き合うのは、単なる予測モデルの精度向上ではありません。消費、健康、キャリアといった複雑な意思決定を支援するため、因果推論や強化学習をいかに応用し、倫理的課題を乗り越えているのか。現場のデータサイエンティストが、その挑戦とやりがいを具体例と共に語ります。
+                            </p>
+                        </div>
+                        <div class="p-8 pt-0">
+                             <a href="data-scientist-career-building-ai-models-for-decision-making-31.html" class="font-semibold text-accent-color hover:text-accent-hover transition-colors duration-300 inline-flex items-center">
+                                記事を読む
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
                     </div>
 
-                    <!-- Job Opening: Data Engineer -->
-                    <div class="mb-6 bg-slate-800/50 border border-slate-700 rounded-lg p-6 transition-shadow duration-300 hover:shadow-lg">
-                        <h3 class="text-2xl font-bold text-white">データエンジニア</h3>
-                        <p class="text-blue-300 mt-1 mb-3">Data Engineer</p>
-                        <p class="text-slate-300 mb-4">信頼性と拡張性の高いデータ基盤を設計・構築・運用します。分析やモデル開発に必要なデータを、安全かつ効率的に利用できる形に整備するデータパイプラインを構築します。</p>
-                        <p class="text-slate-400"><strong class="text-slate-200">主な責務:</strong> データパイプライン (ETL/ELT) の設計・開発、データウェアハウス/レイクの管理、データ品質の担保</p>
-                        <p class="text-slate-400 mt-2"><strong class="text-slate-200">必須スキル:</strong> SQL, Python, 分散処理技術 (Sparkなど), クラウドデータサービスに関する知識</p>
-                    </div>
-                </div>
-
-                <div class="mt-16 text-center">
-                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-8">成長を加速させる環境</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                        <div class="text-center">
-                            <div class="flex items-center justify-center h-16 w-16 mx-auto bg-slate-800 rounded-full mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-                            </div>
-                            <h4 class="text-lg font-semibold text-white">先端技術への挑戦</h4>
-                            <p class="text-slate-400 mt-1">最新論文の輪読会や学会参加支援を通じ、常に技術の最前線に触れることができます。</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="flex items-center justify-center h-16 w-16 mx-auto bg-slate-800 rounded-full mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-                            </div>
-                            <h4 class="text-lg font-semibold text-white">倫理性の重視</h4>
-                            <p class="text-slate-400 mt-1">独立したAI倫理委員会を設置し、開発の全プロセスで倫理的な配慮を徹底します。</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="flex items-center justify-center h-16 w-16 mx-auto bg-slate-800 rounded-full mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                            </div>
-                            <h4 class="text-lg font-semibold text-white">自律性と協調</h4>
-                            <p class="text-slate-400 mt-1">フラットでオープンな組織文化のもと、専門性を尊重し、チームで大きな課題に挑みます。</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="flex items-center justify-center h-16 w-16 mx-auto bg-slate-800 rounded-full mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-                            </div>
-                            <h4 class="text-lg font-semibold text-white">継続的な学習</h4>
-                            <p class="text-slate-400 mt-1">書籍購入補助や資格取得支援、定期的な社内勉強会で、メンバーの継続的な成長をサポートします。</p>
-                        </div>
-                    </div>
-                    <div class="mt-16">
-                        <a href="../contact/index.html" class="inline-block px-10 py-4 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 transition-transform duration-300 hover:scale-105">
-                            採用に応募・問い合わせる
-                        </a>
-                    </div>
                 </div>
             </div>
         </section>
 
     </main>
-    
+
+
     <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-slate-800">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <!-- Company Info -->
-                <div class="col-span-2 md:col-span-1">
-                    <h3 class="text-lg font-semibold text-white">QuantumLeap Inc.</h3>
-                    <p class="mt-2 text-sm text-slate-400">データとAIで個人の可能性とQOLを最大化し、より豊かな社会を実現する。</p>
-                </div>
-                <!-- Solutions -->
+    <footer style="background-color: var(--footer-bg);" class="text-gray-300">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <!-- Column 1: Company Info -->
                 <div>
-                    <h4 class="text-sm font-semibold text-slate-300 tracking-wider uppercase">ソリューション</h4>
-                    <ul class="mt-4 space-y-2">
-                        <li><a href="../solutions/individual.html" class="text-sm text-slate-400 hover:text-white">個人向けサービス</a></li>
-                        <li><a href="../solutions/partner.html" class="text-sm text-slate-400 hover:text-white">パートナーソリューション</a></li>
-                        <li><a href="../solutions/case-studies.html" class="text-sm text-slate-400 hover:text-white">導入事例</a></li>
+                    <h3 class="text-xl font-bold font-en text-white mb-4">DataOptimize Inc.</h3>
+                    <p class="text-sm font-jp" style="color: var(--footer-text);">
+                        データとAIの力で個人の可能性とQOLを最大化し、より豊かな社会を実現します。
+                    </p>
+                </div>
+
+                <!-- Column 2: Navigation -->
+                <div>
+                    <h4 class="font-semibold text-white tracking-wider uppercase mb-4">ナビゲーション</h4>
+                    <ul class="space-y-3">
+                        <li><a href="../index.html" class="hover:text-white transition-colors duration-300">ホーム</a></li>
+                        <li><a href="../vision/index.html" class="hover:text-white transition-colors duration-300">理念・哲学</a></li>
+                        <li><a href="../solutions/index.html" class="hover:text-white transition-colors duration-300">ソリューション</a></li>
+                        <li><a href="../insights/index.html" class="hover:text-white transition-colors duration-300">知見・洞察</a></li>
+                        <li><a href="index.html" class="hover:text-white transition-colors duration-300">協業・採用</a></li>
                     </ul>
                 </div>
-                <!-- Legal -->
+
+                <!-- Column 3: Legal -->
                 <div>
-                    <h4 class="text-sm font-semibold text-slate-300 tracking-wider uppercase">リーガル</h4>
-                    <ul class="mt-4 space-y-2">
-                        <li><a href="../legal/privacy-policy.html" class="text-sm text-slate-400 hover:text-white">プライバシーポリシー</a></li>
-                        <li><a href="#" class="text-sm text-slate-400 hover:text-white">利用規約</a></li>
+                    <h4 class="font-semibold text-white tracking-wider uppercase mb-4">リーガル</h4>
+                    <ul class="space-y-3">
+                        <li><a href="../legal/privacy-policy.html" class="hover:text-white transition-colors duration-300">プライバシーポリシー</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">利用規約</a></li>
                     </ul>
                 </div>
-                <!-- Connect -->
+
+                <!-- Column 4: Contact -->
                 <div>
-                    <h4 class="text-sm font-semibold text-slate-300 tracking-wider uppercase">企業情報</h4>
-                    <ul class="mt-4 space-y-2">
-                        <li><a href="../vision/index.html" class="text-sm text-slate-400 hover:text-white">理念・哲学</a></li>
-                        <li><a href="../collaboration/index.html" class="text-sm text-slate-400 hover:text-white">協業・採用</a></li>
-                        <li><a href="../contact/index.html" class="text-sm text-slate-400 hover:text-white">お問い合わせ</a></li>
+                    <h4 class="font-semibold text-white tracking-wider uppercase mb-4">お問い合わせ</h4>
+                    <ul class="space-y-3">
+                        <li><a href="../contact/index.html" class="hover:text-white transition-colors duration-300">お問い合わせフォーム</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">資料請求</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
-                <p>&copy; 2024 QuantumLeap Inc. All rights reserved.</p>
+
+            <div class="border-t border-gray-700 mt-16 pt-8 text-center text-sm" style="color: var(--footer-text);">
+                <p>&copy; 2024 DataOptimize Inc. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -344,14 +298,11 @@
     <script>
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        const menuIconOpen = document.getElementById('menu-icon-open');
-        const menuIconClose = document.getElementById('menu-icon-close');
 
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            menuIconOpen.classList.toggle('hidden');
-            menuIconClose.classList.toggle('hidden');
         });
     </script>
+
 </body>
 </html>
