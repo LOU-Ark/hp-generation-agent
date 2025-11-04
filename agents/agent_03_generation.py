@@ -4,49 +4,59 @@ import json
 from google import genai
 from google.genai import types
 
-# ⬇️ [修正] GTM_ID を受け取るように引数を追加
-def generate_single_page_html(client, target_page, identity, strategy_full, page_list, GTM_ID=None, retry_attempts=3):
+# ⬇️ [修正] GTM_ID と ADSENSE_CLIENT_ID を受け取る
+def generate_single_page_html(client, target_page, identity, strategy_full, page_list, GTM_ID=None, ADSENSE_CLIENT_ID=None, retry_attempts=3):
     """
     ターゲットページ情報に基づいてプロンプトを動的に生成し、HTMLファイルを出力する。
-    GTM_IDが指定された場合、GTMスニペットを自動で挿入する。
+    GTMとAdSenseのスニペットを自動で挿入する。
     """
     if client is None:
         return "❌ Geminiクライアントが利用できません。"
 
-    nav_structure = "\n".join([f' - {p["title"]} ({p["file_name"]})' for p in page_list])
+    nav_structure = "\n".join([f' - {p.get("title", "N/A")} ({p.get("file_name", "N/A")})' for p in page_list])
 
     target_title = target_page['title']
     target_filename = target_page['file_name']
     target_purpose = target_page['purpose']
-
-    # --- ⬇️ [追加] GTMスニペットの挿入指示を動的に作成 ---
+    
+    # --- GTMスニペットの挿入指示 ---
     gtm_instructions = ""
     if GTM_ID:
         print(f"  > GTM ID ({GTM_ID}) をHTMLに挿入します。")
         gtm_instructions = f"""
-    5.  **GTM (Google Tag Manager) の挿入:** - 以下のGTMスニペット（<head>用）を、<head>タグのできるだけ高い位置（<meta charset...
-          の直後など）に挿入してください:
+    5.  **GTM (Google Tag Manager) の挿入:**
+        - <head> タグのできるだけ高い位置に以下のコードを挿入してください:
         <script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
         new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         }})(window,document,'script','dataLayer','{GTM_ID}');</script>
-        - 以下のGTMスニペット（<body>用）を、<body>タグの直後に挿入してください:
+        - <body> タグの直後に以下のコードを挿入してください:
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={GTM_ID}"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         """
     else:
          print(f"  > GTM ID が指定されていないため、GTMタグは挿入しません。")
+         
+    # --- ⬇️ [追加] AdSenseスニペットの挿入指示 ---
+    adsense_instructions = ""
+    if ADSENSE_CLIENT_ID:
+        print(f"  > AdSense Client ID ({ADSENSE_CLIENT_ID}) をHTMLに挿入します。")
+        adsense_instructions = f"""
+    6.  **Google AdSense の挿入:**
+        - <head> タグ内に以下のコードを挿入してください:
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT_ID}"
+             crossorigin="anonymous"></script>
+        """
+    else:
+        print(f"  > AdSense ID が指定されていないため、AdSenseタグは挿入しません。")
     # --- ⬆️ [追加] ここまで ---
 
-    # [修正] コンテンツ指示を簡素化
     if target_filename == 'index.html' or 'index.html' in target_filename:
         content_instruction = f"このページはハブページ（目次）です。目的（{target_purpose}）を達成するため、**深い論理構成と具体的な記述**に焦点を当ててください。"
     else:
-        # 詳細記事
         content_instruction = f"このページは詳細記事です。目的（{target_purpose}）を達成するため、**深い論理構成と具体的なデータサイエンスの記述**に焦点を当ててください。"
     
-    # [修正] strategy_full が None の場合に対応
     content_focus = f"**このページの具体的な目的と、必要なコンテンツの詳細:** {target_purpose}\n"
     if strategy_full:
         content_focus += f"\n--- 全体戦略の要約 ---\n{strategy_full}"
@@ -66,7 +76,8 @@ def generate_single_page_html(client, target_page, identity, strategy_full, page
     2.  **ナビゲーションの統合:** ヘッダーとフッターのリンクには、**ファイル名（例: vision/index.html）を正確に**使用してください。
     3.  **コンテンツの役割:** {content_instruction}
     4.  **Tailwind CSS:** CDNをロードし、全てのスタイリングにTailwindクラスを使用してください。
-    {gtm_instructions} 
+    {gtm_instructions}
+    {adsense_instructions} 
 
     ### ページ固有の入力データ
     - ページのタイトル: {target_title}
