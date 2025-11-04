@@ -1,5 +1,6 @@
 import os
 import sys
+import re # ⬅️ [追加] 正規表現ライブラリをインポート
 from bs4 import BeautifulSoup
 
 # --- 0. 設定 ---
@@ -49,10 +50,7 @@ def main():
         print(f"❌ サイトディレクトリ ({BASE_DIR}) が見つかりません。")
         sys.exit(1)
         
-    files_processed_gtm = 0
-    files_processed_adsense = 0
-    files_skipped_gtm = 0
-    files_skipped_adsense = 0
+    files_processed = 0
     TARGET_EXTENSIONS = ('.html', '.htm')
     
     print(f"--- 🏭 {BASE_DIR} 配下の全HTMLファイルをスキャン・処理中 ---")
@@ -63,54 +61,70 @@ def main():
                 full_path = os.path.join(root, filename)
                 
                 try:
-                    # 3. HTMLを読み込む
                     with open(full_path, 'r', encoding='utf-8') as f:
                         soup = BeautifulSoup(f, 'html.parser')
                     
-                    modified = False # ファイルが変更されたか追跡
+                    modified = False 
+                    
+                    if not soup.head or not soup.body:
+                         print(f"⚠️ 警告: <head>または<body>タグなし (スキップ): {full_path}")
+                         continue
 
-                    # 4. GTMタグの挿入
-                    if GTM_ID:
-                        if GTM_ID in str(soup):
-                            files_skipped_gtm += 1
-                        elif soup.head and soup.body:
-                            # GTM Head
-                            gtm_script_tag = BeautifulSoup(GTM_HEAD_TEMPLATE.format(GTM_ID=GTM_ID), 'html.parser')
-                            soup.head.insert(0, gtm_script_tag)
-                            # GTM Body
-                            gtm_noscript_tag = BeautifulSoup(GTM_BODY_TEMPLATE.format(GTM_ID=GTM_ID), 'html.parser')
-                            soup.body.insert(0, gtm_noscript_tag)
-                            files_processed_gtm += 1
-                            modified = True
-                        else:
-                            print(f"⚠️ 警告: GTM挿入スキップ (<head>または<body>なし): {full_path}")
-
-                    # 5. AdSenseタグの挿入
+                    # --- ⬇️ [修正] 3. 既存のタグをすべて削除 ---
+                    
+                    # 既存のAdSenseタグを削除
                     if ADSENSE_CLIENT_ID:
-                        if ADSENSE_CLIENT_ID in str(soup):
-                            files_skipped_adsense += 1
-                        elif soup.head:
-                            adsense_script_tag = BeautifulSoup(ADSENSE_HEAD_TEMPLATE.format(ADSENSE_CLIENT_ID=ADSENSE_CLIENT_ID), 'html.parser')
-                            soup.head.append(adsense_script_tag) # <head>の末尾に追加
-                            files_processed_adsense += 1
+                        existing_adsense = soup.head.find_all("script", {"src": re.compile(f"adsbygoogle.js.*{ADSENSE_CLIENT_ID}")})
+                        for tag in existing_adsense:
+                            tag.extract()
                             modified = True
-                        else:
-                            print(f"⚠️ 警告: AdSense挿入スキップ (<head>なし): {full_path}")
+                            
+                    # 既存のGTM <head> タグを削除
+                    if GTM_ID:
+                        existing_gtm_head = soup.head.find_all("script", string=re.compile(f"dataLayer','{GTM_ID}'"))
+                        for tag in existing_gtm_head:
+                            tag.extract()
+                            modified = True
+                    
+                    # 既存のGTM <body> タグを削除
+                    if GTM_ID:
+                        existing_gtm_body = soup.body.find_all("noscript", string=re.compile(f"id={GTM_ID}"))
+                        for tag in existing_gtm_body:
+                            tag.extract()
+                            modified = True
+                    # --- ⬆️ [修正] ここまで ---
 
-                    # 6. ファイルを上書き保存 (変更があった場合のみ)
+                    # --- 4. AdSenseタグの挿入 (最優先: 0番目) ---
+                    if ADSENSE_CLIENT_ID:
+                        adsense_script_tag = BeautifulSoup(ADSENSE_HEAD_TEMPLATE.format(ADSENSE_CLIENT_ID=ADSENSE_CLIENT_ID), 'html.parser')
+                        soup.head.insert(0, adsense_script_tag) # ⬅️ 先頭(0番目)に挿入
+                        modified = True
+
+                    # --- 5. GTMタグの挿入 (2番目) ---
+                    if GTM_ID:
+                        # GTM Head (AdSenseの次、つまり1番目に挿入)
+                        gtm_script_tag = BeautifulSoup(GTM_HEAD_TEMPLATE.format(GTM_ID=GTM_ID), 'html.parser')
+                        insert_position = 1 if ADSENSE_CLIENT_ID else 0 # AdSenseがあれば1番目
+                        soup.head.insert(insert_position, gtm_script_tag) 
+                        
+                        # GTM Body (0番目)
+                        gtm_noscript_tag = BeautifulSoup(GTM_BODY_TEMPLATE.format(GTM_ID=GTM_ID), 'html.parser')
+                        soup.body.insert(0, gtm_noscript_tag)
+                        
+                        modified = True
+
+                    # --- 6. ファイルを上書き保存 (変更があった場合のみ) ---
                     if modified:
                         with open(full_path, 'w', encoding='utf-8') as f:
                             f.write(str(soup))
-                        print(f"✅ タグ挿入完了: {full_path}")
+                        print(f"✅ タグ挿入/修正完了: {full_path}")
+                        files_processed += 1
                     
                 except Exception as e:
                     print(f"❌ エラー ({full_path}): {e}")
 
     print(f"\n--- 🏷️ スクリプト完了 ---")
-    if GTM_ID:
-        print(f"✅ GTM: {files_processed_gtm} 件に挿入しました。(スキップ: {files_skipped_gtm} 件)")
-    if ADSENSE_CLIENT_ID:
-        print(f"✅ AdSense: {files_processed_adsense} 件に挿入しました。(スキップ: {files_skipped_adsense} 件)")
+    print(f"✅ 合計 {files_processed} 件のHTMLファイルにタグを挿入/修正しました。")
 
 if __name__ == "__main__":
     main()
